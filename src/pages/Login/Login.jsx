@@ -1,14 +1,50 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
+import { ImSpinner10 } from "react-icons/im";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
-    const {signIn,signInWithGoogle} = useAuth()
-
-    const handleSubmit=(e)=>{
+    const {signIn,signInWithGoogle,loading,setLoading} = useAuth()
+    const navigate = useNavigate()
+    const handleSubmit =async (e) => {
         e.preventDefault();
-    }
+        const form = e.target;
+        
+        const email = form.email.value;
+        const password = form.password.value;
+        
+    
+        console.log(email, password);
+        try{
+            setLoading(true)
+
+           //signin
+           await signIn(email,password)
+           navigate('/')
+           toast.success('Signup Successful')
+        }
+        catch(err){
+            console.log(err);
+            toast.error(err.message)
+            
+        }
+      };
+
+      //handle google sign in
+      const handleGoogleSignIn = async()=>{
+        try{
+            await signInWithGoogle()
+            navigate('/')
+            toast.success('Login Successful')
+        }
+        catch(err){
+           
+            console.log(err);
+            toast.error(err.message)
+        }
+      }
   return (
     <div className="flex justify-center items-center min-h-screen font-outfit">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900">
@@ -18,6 +54,7 @@ const Login = () => {
         </div>
         
         <form
+          onSubmit={handleSubmit}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -61,10 +98,11 @@ const Login = () => {
 
           <div>
             <button
+            disabled={loading}
               type="submit"
-              className="bg-blue-400 w-full rounded-md py-3 text-white"
+              className="bg-blue-400 w-full rounded-md py-3 text-white disabled:cursor-not-allowed"
             >
-              Continue
+              {loading? <ImSpinner10 className="animate-spin m-auto"/> : 'Login'}
             </button>
           </div>
         </form>
@@ -81,9 +119,11 @@ const Login = () => {
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
         <button
+        disabled={loading}
+          onClick={handleGoogleSignIn}
           aria-label="Login with Google"
           type="button"
-          className="flex items-center justify-center my-3 w-full p-4 space-x-4 border rounded-md focus:ring-2 bg-blue-400 focus:ring-offset-1  hover:bg-blue-500 text-white"
+          className="flex items-center justify-center my-3 w-full p-4 space-x-4 border rounded-md focus:ring-2 bg-blue-400 focus:ring-offset-1  hover:bg-blue-500 text-white disabled:cursor-not-allowed"
         >
           <div className="bg-white p-1 rounded-full">
           <FcGoogle className="text-md"/>
