@@ -1,9 +1,12 @@
+import Slides from "../../components/Banner/Slides";
+import ProfessionalSection from "./ProfessionalSection/ProfessionalSection";
 
 
 const Home = () => {
     return (
         <div>
-            <h3>Home Page</h3>
+            <Slides></Slides>
+            <ProfessionalSection></ProfessionalSection>
         </div>
     );
 };
