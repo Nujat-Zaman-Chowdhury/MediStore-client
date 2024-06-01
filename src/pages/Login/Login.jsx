@@ -14,32 +14,9 @@ const Login = () => {
       register,
       handleSubmit,
       reset,
-      watch,
       formState: { errors },
     } = useForm()
-    // const handleSubmit =async (e) => {
-    //     e.preventDefault();
-    //     const form = e.target;
-        
-    //     const email = form.email.value;
-    //     const password = form.password.value;
-        
-    
-    //     console.log(email, password);
-    //     try{
-    //         setLoading(true)
 
-    //        //signin
-    //        await signIn(email,password)
-    //        navigate('/')
-    //        toast.success('Signup Successful')
-    //     }
-    //     catch(err){
-    //         console.log(err);
-    //         toast.error(err.message)
-            
-    //     }
-    //   };
 
       const onSubmit = async(data) => {
         // console.log(data)
