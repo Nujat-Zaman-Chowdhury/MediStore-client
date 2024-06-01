@@ -1,15 +1,26 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
 
 
 const Navbar = () => {
     const {user,logOut} = useAuth();
+    const [sticky,setSticky]= useState(false);
     const navLinks = <>
     <li><Link to="/" className="text-xl block after:block bg-none after:h-[3px] after:bg-blue-400 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">Home</Link></li>
     
+    <li><Link to="/" className="text-xl block after:block bg-none after:h-[3px] after:bg-blue-400 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-center">Shop</Link></li>
+    
     </>
+
+
+useEffect(()=>{
+  window.addEventListener('scroll',()=>{
+    window.scrollY>50? setSticky(true) :  setSticky(false);
+  })
+},[])
     return (
-        <div className="navbar bg-base-100 font-outfit shadow-md shadow-blue-200">
+        <div className={`navbar fixed top-0 left-0 z-50  font-outfit shadow-md shadow-blue-200 ${sticky? 'bg-blue-100 text-blue-500': 'bg-base-100'}`}>
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
