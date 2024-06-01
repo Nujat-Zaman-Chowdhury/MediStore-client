@@ -3,36 +3,61 @@ import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner10 } from "react-icons/im";
 import toast from "react-hot-toast";
-
+import { useForm } from "react-hook-form"
 
 
 const Login = () => {
     
     const {signIn,signInWithGoogle,loading,setLoading} = useAuth()
     const navigate = useNavigate()
-    const handleSubmit =async (e) => {
-        e.preventDefault();
-        const form = e.target;
+    const {
+      register,
+      handleSubmit,
+      reset,
+      watch,
+      formState: { errors },
+    } = useForm()
+    // const handleSubmit =async (e) => {
+    //     e.preventDefault();
+    //     const form = e.target;
         
-        const email = form.email.value;
-        const password = form.password.value;
+    //     const email = form.email.value;
+    //     const password = form.password.value;
         
     
-        console.log(email, password);
-        try{
-            setLoading(true)
+    //     console.log(email, password);
+    //     try{
+    //         setLoading(true)
 
-           //signin
-           await signIn(email,password)
-           navigate('/')
-           toast.success('Signup Successful')
-        }
-        catch(err){
-            console.log(err);
-            toast.error(err.message)
+    //        //signin
+    //        await signIn(email,password)
+    //        navigate('/')
+    //        toast.success('Signup Successful')
+    //     }
+    //     catch(err){
+    //         console.log(err);
+    //         toast.error(err.message)
             
-        }
-      };
+    //     }
+    //   };
+
+      const onSubmit = async(data) => {
+        // console.log(data)
+        try{
+          setLoading(true)
+
+         //signin
+         await signIn(data.email,data.password)
+         navigate('/')
+         toast.success('Login Successful')
+      }
+      catch(err){
+        setLoading(false)
+          console.log(err);
+          toast.error(err.message)
+          
+      }
+    }
 
       //handle google sign in
       const handleGoogleSignIn = async()=>{
@@ -56,7 +81,7 @@ const Login = () => {
         </div>
         
         <form
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -70,15 +95,16 @@ const Login = () => {
                 Email address
               </label>
               <input
+              {...register("email" ,{ required: true })}
                 type="email"
                 name="email"
                 id="email"
-                required
                 placeholder="Please Enter Your Email Here"
                 className="w-full px-3 py-2 border rounded-md border-gray-600 focus:outline-blue-500 bg-base text-blue-500"
                 color="#4299e1"
                 data-temp-mail-org="0"
               />
+              {errors.email && <span className="text-red-600">Email is required</span>}
             </div>
             <div>
               <div className="flex justify-between">
@@ -87,14 +113,15 @@ const Login = () => {
                 </label>
               </div>
               <input
+              {...register("password" ,{ required: true })}
                 type="password"
                 name="password"
                 autoComplete="current-password"
                 id="password"
-                required
                 placeholder="Enter Your Password"
                 className="w-full px-3 py-2 border rounded-md border-gray-600 focus:outline-blue-400 bg-base text-blue-500"
               />
+              {errors.email && <span className="text-red-600">Password is required</span>}
             </div>
           </div>
 

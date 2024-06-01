@@ -20,7 +20,7 @@ useEffect(()=>{
   })
 },[])
     return (
-        <div className={`navbar fixed top-0 left-0 z-50  font-outfit shadow-md shadow-blue-200 ${sticky? 'bg-blue-100 text-blue-500': 'bg-base-100'}`}>
+        <div className={`navbar fixed top-0 left-0 z-50  font-outfit shadow-md shadow-blue-200 ${sticky? 'bg-base-100 text-blue-500': 'bg-base-100'}`}>
   <div className="navbar-start">
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,7 +33,7 @@ useEffect(()=>{
     </div>
     <div className="flex items-center">
         <img src="/logo.png" alt="" className="w-12 h-12 mr-2 object-cover" />
-        <Link to="/" className="text-xl font-bold text-blue-400">MediStore</Link>
+        <Link to="/" className="text-xl font-bold text-blue-400 font-outfit">MediStore</Link>
     </div>
   </div>
   <div className="navbar-center hidden lg:flex">
