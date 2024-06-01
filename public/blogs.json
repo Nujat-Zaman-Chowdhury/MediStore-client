@@ -1,0 +1,47 @@
+[
+    {
+      "id": 1,
+      "category": "Vitamin",
+      "title": "Vitamins That Are Suitable For Maintaining Body Fitness",
+      "description": "Discover the essential vitamins that play a crucial role in maintaining body fitness, enhancing muscle function, boosting immune support, and promoting overall health.",
+      "image": "https://i.ibb.co/8x29781/blogimage.jpg"
+    },
+    {
+      "id": 2,
+      "category": "Health",
+      "title": "Top 10 Tips for a Healthy Lifestyle",
+      "description": "Explore ten practical tips to adopt a healthier lifestyle, from balanced eating and regular exercise to stress management and adequate sleep.",
+      "image": "https://i.ibb.co/TW3C8T1/health.jpg"
+    },
+    {
+      "id": 3,
+      "category": "Nutrition",
+      "title": "The Importance of a Balanced Diet",
+      "description": "Understand the significance of a balanced diet, including the right proportions of macronutrients and micronutrients to support overall health and well-being.",
+      "image": "https://i.ibb.co/x2BC4jF/Nutrition.jpg"
+    },
+    {
+      "id": 4,
+      "category": "Fitness",
+      "title": "Effective Workout Routines for All Fitness Levels",
+      "description": "Find workout routines tailored to different fitness levels, including beginner, intermediate, and advanced exercises to help you achieve your fitness goals.",
+      "image": "https://i.ibb.co/Z6xDHXQ/Fitness.jpg"
+    },
+    {
+      "id": 5,
+      "category": "Pharmacy",
+      "title": "Pharmacy Brings Hundreds Of Off-Site Vaccination Clinics",
+      "description": "Learn about mindfulness and meditation techniques that can improve mental wellness, reduce stress, and enhance overall emotional health.",
+      "image": "https://i.ibb.co/kXcCQ8P/pharmacy.jpg"
+    },
+    {
+        
+            "id": 6,
+            "category": "Protection",
+            "title": "The Protective Power of Vitamin C Against Illnesses",
+            "description": "Strengthening the immune system, neutralizing harmful free radicals, and lowering the risk of chronic diseases. Discover the best dietary sources to ensure you get enough of this vital nutrient.",
+            "image": "https://i.ibb.co/t2VKzRf/protection.jpg"
+        
+    }
+  ]
+  
