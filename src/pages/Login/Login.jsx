@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import { ImSpinner10 } from "react-icons/im";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form"
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -13,7 +14,6 @@ const Login = () => {
     const {
       register,
       handleSubmit,
-      reset,
       formState: { errors },
     } = useForm()
 
@@ -51,6 +51,9 @@ const Login = () => {
       }
   return (
     <div className="flex justify-center items-center min-h-screen font-outfit">
+      <Helmet>
+                <title>MediStore | Login</title>
+      </Helmet>
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900">
         <div className="mb-8 text-center">
           <h1 className="my-3 text-4xl font-bold text-blue-400">Log In</h1>
