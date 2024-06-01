@@ -2,10 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ImSpinner10 } from "react-icons/im";
 
 const SignUp = () => {
     const navigate = useNavigate()
-    const {createUser,UpdateUserProfile} = useAuth()
+    const {createUser,updateUserProfile,loading,setLoading} = useAuth()
   const handleSubmit =async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,6 +20,7 @@ const SignUp = () => {
 
     console.log(name, email, image, password, role);
     try{
+        setLoading(true)
        const {data} =await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
         formData
        )
@@ -29,12 +31,13 @@ const SignUp = () => {
        console.log(result);
 
        //update user name and photo
-       await UpdateUserProfile(name,data.data.display_url)
+       await updateUserProfile(name,data.data.display_url)
        navigate('/')
        toast.success('Signup Successful')
     }
     catch(err){
         console.log(err);
+        toast.error(err.message)
     }
   };
   return (
@@ -143,10 +146,12 @@ const SignUp = () => {
           </div>
           <div>
             <button
+
+            disabled={loading}
               type="submit"
-              className="bg-blue-400 w-full rounded-md py-3 text-white"
+              className="bg-blue-400 w-full rounded-md py-3 text-white disabled:cursor-not-allowed"
             >
-              Continue
+              {loading? <ImSpinner10 className="animate-spin m-auto"/> : 'Sign Up'}
             </button>
           </div>
         </form>
