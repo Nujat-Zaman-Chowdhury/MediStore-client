@@ -1,6 +1,42 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
+    const navigate = useNavigate()
+    const {createUser,UpdateUserProfile} = useAuth()
+  const handleSubmit =async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const image = form.image.files[0];
+    const password = form.password.value;
+    const role = form.role.value;
+    const formData = new FormData()
+    formData.append('image',image)
+
+    console.log(name, email, image, password, role);
+    try{
+       const {data} =await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+        formData
+       )
+       console.log(data.data.display_url);
+
+       //signup
+       const result = await createUser(email,password)
+       console.log(result);
+
+       //update user name and photo
+       await UpdateUserProfile(name,data.data.display_url)
+       navigate('/')
+       toast.success('Signup Successful')
+    }
+    catch(err){
+        console.log(err);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen font-outfit">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900">
@@ -10,6 +46,7 @@ const SignUp = () => {
         </div>
 
         <form
+          onSubmit={handleSubmit}
           noValidate=""
           action=""
           className="space-y-6 ng-untouched ng-pristine ng-valid"
@@ -86,12 +123,22 @@ const SignUp = () => {
             </div>
           </div>
           <div className="space-y-1 text-sm">
-            <select name="role" className="w-full px-3 py-3 border rounded-md border-gray-600 focus:outline-blue-400 bg-base ">
-              <option disabled selected>
+            <label
+              htmlFor="password"
+              className="block mb-2 text-md font-poppins"
+            >
+              Select role
+            </label>
+            <select
+            defaultValue="default"
+              name="role"
+              className="w-full px-3 py-3 border rounded-md border-gray-600 focus:outline-blue-400 bg-base "
+            >
+              <option disabled value="default">
                 Select Your Role
               </option>
-              <option>User</option>
-              <option>Seller</option>
+              <option value="User">User</option>
+              <option value="Seller">Seller</option>
             </select>
           </div>
           <div>

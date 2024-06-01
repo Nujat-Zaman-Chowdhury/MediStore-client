@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../hooks/useAuth";
 
 
 const Login = () => {
+    const {signIn,signInWithGoogle} = useAuth()
+
+    const handleSubmit=(e)=>{
+        e.preventDefault();
+    }
   return (
     <div className="flex justify-center items-center min-h-screen font-outfit">
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10  text-gray-900">
