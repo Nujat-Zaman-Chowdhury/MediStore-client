@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import DashboardLayout from "../layouts/DashboardLayout";
 import ManageUsers from "../Providers/Dashboard/Admin/ManageUsers";
+import ManageCategory from "../Providers/Dashboard/Admin/ManageCategory";
+import PaymentManagement from "../Providers/Dashboard/Admin/PaymentManagement";
 
 export const router = createBrowserRouter([
     {
@@ -23,10 +25,22 @@ export const router = createBrowserRouter([
     {
         path:'/dashboard',
         element:<DashboardLayout></DashboardLayout>,
-        children:[{
+        children:[
+            {
             path:"manage-users",
             element:<ManageUsers></ManageUsers>
-        }]
+            },
+            {
+            path:"manage-category",
+            element:<ManageCategory></ManageCategory>
+            },
+            {
+            path:"payment-management",
+            element:<PaymentManagement></PaymentManagement>
+            },
+    
+    
+    ]
         
     }
 ])
