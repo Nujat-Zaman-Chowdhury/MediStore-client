@@ -5,9 +5,11 @@ import { ImSpinner10 } from "react-icons/im";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form"
 import { Helmet } from "react-helmet-async";
+import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 
 const Login = () => {
+    const axiosCommon = useAxiosCommon()
     
     const {signIn,signInWithGoogle,loading,setLoading} = useAuth()
     const navigate = useNavigate()
@@ -39,7 +41,16 @@ const Login = () => {
       //handle google sign in
       const handleGoogleSignIn = async()=>{
         try{
-            await signInWithGoogle()
+            const data = await signInWithGoogle()
+            console.log(data.user.email);
+            const currentUser = {
+              name:data?.user?.displayName,
+              email:data?.user?.email,
+              role: "User",
+              profilePicture: data.photoURL,
+              createdAt: Date.now()
+            }
+            axiosCommon.put(`/user`,currentUser)
             navigate('/')
             toast.success('Login Successful')
         }
