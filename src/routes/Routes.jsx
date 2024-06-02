@@ -10,6 +10,9 @@ import ManageCategory from "../Providers/Dashboard/Admin/ManageCategory";
 import PaymentManagement from "../Providers/Dashboard/Admin/PaymentManagement";
 import SalesReport from "../Providers/Dashboard/Admin/SalesReport";
 import ManageBannerAdvertise from "../Providers/Dashboard/Admin/ManageBannerAdvertise";
+import AdminHomePage from "../Providers/Dashboard/Admin/AdminHomePage";
+import DashboardHome from "../Providers/Dashboard/Common/DashboardHome";
+import ManageMedicines from "../Providers/Dashboard/Seller/ManageMedicines";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +33,10 @@ export const router = createBrowserRouter([
         children:[
             //admin routes
             {
+            index:true,
+            element:<DashboardHome></DashboardHome>
+            },
+            {
             path:"manage-users",
             element:<ManageUsers></ManageUsers>
             },
@@ -49,6 +56,13 @@ export const router = createBrowserRouter([
             {
             path:"manage-banner",
             element:<ManageBannerAdvertise></ManageBannerAdvertise>
+            },
+
+
+            //seller related routes
+            {
+                path:"manage-medicines",
+                element:<ManageMedicines    ></ManageMedicines>
             },
     
     

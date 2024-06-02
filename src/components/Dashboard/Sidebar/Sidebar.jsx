@@ -4,14 +4,15 @@ import { GrLogout } from 'react-icons/gr'
 import { BsFillFileEarmarkMedicalFill } from 'react-icons/bs'
 
 import { AiFillSetting, AiOutlineBars } from 'react-icons/ai'
-
+import { TbHomeHand } from "react-icons/tb";
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
-import {MdManageAccounts, MdPayments } from 'react-icons/md'
+import { MdPayments } from 'react-icons/md'
 import { FaHome } from 'react-icons/fa'
 import { FaUsers } from 'react-icons/fa6'
 import { IoStatsChartSharp } from 'react-icons/io5'
+import { GiMedicines } from "react-icons/gi";
 
 const Sidebar = () => {
   const { logOut } = useAuth()
@@ -63,9 +64,9 @@ const Sidebar = () => {
 
             {/*  Menu Items */}
             <nav>
-              {/* Statistics */}
+              {/* dashboard home */}
               <NavLink
-                to='statistics'
+                to='/dashboard'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
                     isActive ? 'bg-white text-blue-400' : 'text-white'
@@ -74,10 +75,11 @@ const Sidebar = () => {
               >
                 <FaHome className='w-5 h-5' />
 
-                <span className='mx-4 font-medium'>Home</span>
+                <span className='mx-4 font-medium'>Admin Home</span>
               </NavLink>
 
-              {/* Add Room */}
+               {/* admin related   */}
+              {/* manage users */}
               <NavLink
                 to='manage-users'
                 className={({ isActive }) =>
@@ -90,7 +92,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Manage Users</span>
               </NavLink>
-              {/* My Listing */}
+              {/* manage category */}
               <NavLink
                 to='manage-category'
                 className={({ isActive }) =>
@@ -103,7 +105,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Manage Category</span>
               </NavLink>
-              {/* My Listing */}
+              {/*payment management */}
               <NavLink
                 to='payment-management'
                 className={({ isActive }) =>
@@ -116,7 +118,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Payment management</span>
               </NavLink>
-              {/* My Listing */}
+              {/* sales report */}
               <NavLink
                 to='sales-report'
                 className={({ isActive }) =>
@@ -129,7 +131,7 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Sales Report</span>
               </NavLink>
-              {/* My Listing */}
+              {/* manage banner advertise */}
               <NavLink
                 to='manage-banner'
                 className={({ isActive }) =>
@@ -142,6 +144,21 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Manage banner Advertise</span>
               </NavLink>
+
+               {/* seller related  */}
+               <NavLink
+                to='manage-medicines'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
+                    isActive ? 'bg-white text-blue-400' : 'text-white'
+                  }`
+                }
+              >
+                <GiMedicines className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Manage Medicines</span>
+              </NavLink>
+
             </nav>
           </div>
         </div>
@@ -151,16 +168,16 @@ const Sidebar = () => {
 
           {/* Profile Menu */}
           <NavLink
-            to='/dashboard/profile'
+            to='/'
             className={({ isActive }) =>
               `flex items-center px-4 py-2 my-5 text-white transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
                 isActive ? 'bg-white text-blue-400' : 'text-white'
               }`
             }
           >
-            <MdManageAccounts className='w-5 h-5' />
+            <TbHomeHand className='w-5 h-5' />
 
-            <span className='mx-4 font-medium'>Profile</span>
+            <span className='mx-4 font-medium'>Home</span>
           </NavLink>
           <button
             onClick={logOut}
