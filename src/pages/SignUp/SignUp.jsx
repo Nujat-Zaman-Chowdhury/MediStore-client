@@ -3,8 +3,11 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ImSpinner10 } from "react-icons/im";
+import useAxiosCommon, { axiosCommon } from "../../hooks/useAxiosCommon";
 
 const SignUp = () => {
+  const axiosCommon = useAxiosCommon();
+
     const navigate = useNavigate()
     const {createUser,updateUserProfile,loading,setLoading} = useAuth()
   const handleSubmit =async (e) => {
@@ -32,10 +35,25 @@ const SignUp = () => {
 
        //update user name and photo
        await updateUserProfile(name,data.data.display_url)
-       navigate('/')
-       toast.success('Signup Successful')
+       //create user info in db
+      
+        const currentUser={
+          email: email,
+          name: name,
+          role: role,
+          profilePicture: data.data.display_url,
+          createdAt: Date.now()
+        }
+          axiosCommon.put(`/user`,currentUser)
+        
+            console.log("user added to the db");
+            navigate('/')
+            toast.success('Signup Successful')
+        
+         
     }
     catch(err){
+      setLoading(false)
         console.log(err);
         toast.error(err.message)
     }
