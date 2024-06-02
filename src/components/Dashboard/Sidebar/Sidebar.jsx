@@ -79,7 +79,7 @@ const Sidebar = () => {
 
               {/* Add Room */}
               <NavLink
-                to='add-room'
+                to='manage-users'
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
                     isActive ? 'bg-white text-blue-400' : 'text-white'
