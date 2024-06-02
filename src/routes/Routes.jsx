@@ -13,6 +13,8 @@ import ManageBannerAdvertise from "../Providers/Dashboard/Admin/ManageBannerAdve
 import AdminHomePage from "../Providers/Dashboard/Admin/AdminHomePage";
 import DashboardHome from "../Providers/Dashboard/Common/DashboardHome";
 import ManageMedicines from "../Providers/Dashboard/Seller/ManageMedicines";
+import PaymentHistory from "../Providers/Dashboard/Seller/PaymentHistory";
+import AskForAdvertisement from "../Providers/Dashboard/Seller/AskForAdvertisement";
 
 export const router = createBrowserRouter([
     {
@@ -64,6 +66,15 @@ export const router = createBrowserRouter([
                 path:"manage-medicines",
                 element:<ManageMedicines    ></ManageMedicines>
             },
+            {
+                path:"payment-history",
+                element:<PaymentHistory></PaymentHistory>
+            },
+            {
+                path:"ask-for-advertisement",
+                element:<AskForAdvertisement></AskForAdvertisement>
+            },
+            
     
     
     ]

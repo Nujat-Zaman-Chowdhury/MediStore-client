@@ -13,7 +13,7 @@ import { FaHome } from 'react-icons/fa'
 import { FaUsers } from 'react-icons/fa6'
 import { IoStatsChartSharp } from 'react-icons/io5'
 import { GiMedicines } from "react-icons/gi";
-
+import { RiAdvertisementFill, RiChatHistoryFill } from "react-icons/ri";
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
@@ -158,6 +158,30 @@ const Sidebar = () => {
 
                 <span className='mx-4 font-medium'>Manage Medicines</span>
               </NavLink>
+               <NavLink
+                to='payment-history'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
+                    isActive ? 'bg-white text-blue-400' : 'text-white'
+                  }`
+                }
+              >
+                <RiChatHistoryFill className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Payment History</span>
+              </NavLink>
+               <NavLink
+                to='ask-for-advertisement'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
+                    isActive ? 'bg-white text-blue-400' : 'text-white'
+                  }`
+                }
+              >
+                <RiAdvertisementFill className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>Ask For Advertisement</span>
+              </NavLink>
 
             </nav>
           </div>
@@ -166,7 +190,12 @@ const Sidebar = () => {
         <div>
           <hr />
 
-          {/* Profile Menu */}
+          
+
+
+
+
+
           <NavLink
             to='/'
             className={({ isActive }) =>
