@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import SalesReportRow from "../../../components/TableRow/SalesReportRow";
 
 
 const SalesReport = () => {
     return (
         <div>
+            <Helmet>
+                <title>Sales Report | Dashboard</title>
+            </Helmet>
             <h2>Sales Report</h2>
             <div className="overflow-x-auto">
   <table className="table">

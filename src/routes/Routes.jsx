@@ -15,6 +15,7 @@ import DashboardHome from "../Providers/Dashboard/Common/DashboardHome";
 import ManageMedicines from "../Providers/Dashboard/Seller/ManageMedicines";
 import PaymentHistory from "../Providers/Dashboard/Seller/PaymentHistory";
 import AskForAdvertisement from "../Providers/Dashboard/Seller/AskForAdvertisement";
+import UserPaymentHistory from "../Providers/Dashboard/User/UserPaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -73,6 +74,14 @@ export const router = createBrowserRouter([
             {
                 path:"ask-for-advertisement",
                 element:<AskForAdvertisement></AskForAdvertisement>
+            },
+
+
+
+            //user related routes
+            {
+                path:"user-payment-history",
+                element:<UserPaymentHistory></UserPaymentHistory>
             },
             
     

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddMedicineModal from "../../../components/Modal/AddMedicineModal";
 import ManageMedicinesRow from "../../../components/TableRow/ManageMedicinesRow";
+import { Helmet } from "react-helmet-async";
 
 const ManageMedicines = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,6 +10,9 @@ const ManageMedicines = () => {
   };
   return (
     <div>
+        <Helmet>
+                <title>Manage Medicines | Dashboard</title>
+            </Helmet>
       <div className="flex justify-between items-center my-5">
         <h2 className="text-2xl font-outfit font-bold">Manage Medicine Page</h2>
         <button

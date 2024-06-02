@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ManageCategoryRow from "../../../components/TableRow/ManageCategoryRow";
 import AddCategoryModal from "../../../components/Modal/AddCategoryModal";
+import { Helmet } from "react-helmet-async";
 
 
 const ManageCategory = () => {
@@ -10,6 +11,9 @@ const ManageCategory = () => {
     }
     return (
         <div>
+          <Helmet>
+                <title>Manage Category | Dashboard</title>
+            </Helmet>
             <div className="flex justify-between items-center my-5">
             <h2 className="text-2xl font-outfit font-bold">Manage Category Page</h2>
             <button

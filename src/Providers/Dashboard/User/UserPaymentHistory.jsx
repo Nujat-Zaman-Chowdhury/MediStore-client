@@ -1,15 +1,15 @@
 import { Helmet } from "react-helmet-async";
 
 
-const DashboardHome = () => {
+const UserPaymentHistory = () => {
     return (
         <div>
             <Helmet>
-                <title>Home | Dashboard</title>
+                <title>Payment History | Dashboard</title>
             </Helmet>
             
         </div>
     );
 };
 
-export default DashboardHome;
+export default UserPaymentHistory;

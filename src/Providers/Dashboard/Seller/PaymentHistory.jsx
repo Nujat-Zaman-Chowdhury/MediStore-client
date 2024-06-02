@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import PaymentHistoryRow from "../../../components/TableRow/PaymentHistoryRow";
 
 
 const PaymentHistory = () => {
     return (
         <div>
+            <Helmet>
+                <title>Payment History | Dashboard</title>
+            </Helmet>
             <h2 className="text-2xl">Payment History</h2>
             <div className="overflow-x-auto">
   <table className="table">

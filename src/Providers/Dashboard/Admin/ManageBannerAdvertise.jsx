@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import BannerAdvertiseRow from "../../../components/TableRow/BannerAdvertiseRow";
 
 
 const ManageBannerAdvertise = () => {
     return (
         <div>
+            <Helmet>
+                <title>Manage Banner Advertisement | Dashboard</title>
+            </Helmet>
             <h2 className="text-2xl">Manage Banner Advertise</h2>
             <div className="overflow-x-auto">
   <table className="table">

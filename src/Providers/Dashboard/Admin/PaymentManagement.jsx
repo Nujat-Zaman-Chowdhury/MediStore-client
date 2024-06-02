@@ -1,8 +1,12 @@
+import { Helmet } from "react-helmet-async";
 import PaymentManagementRow from "../../../components/TableRow/PaymentManagementRow";
 
 const PaymentManagement = () => {
   return (
     <div className="overflow-x-auto">
+      <Helmet>
+                <title>Payment Management | Dashboard</title>
+            </Helmet>
       <table className="table">
         {/* head */}
         <thead>

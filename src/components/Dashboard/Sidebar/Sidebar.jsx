@@ -14,6 +14,7 @@ import { FaUsers } from 'react-icons/fa6'
 import { IoStatsChartSharp } from 'react-icons/io5'
 import { GiMedicines } from "react-icons/gi";
 import { RiAdvertisementFill, RiChatHistoryFill } from "react-icons/ri";
+import { GoChecklist } from "react-icons/go";
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
@@ -44,7 +45,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`z-10 md:fixed flex flex-col bg-slate-500 justify-between overflow-x-hidden bg-base w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
+        className={`z-10 md:fixed flex flex-col bg-sky-400 justify-between overflow-x-hidden bg-base w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
           isActive && '-translate-x-full'
         }  md:translate-x-0  transition duration-200 ease-in-out`}
       >
@@ -67,6 +68,7 @@ const Sidebar = () => {
               {/* dashboard home */}
               <NavLink
                 to='/dashboard'
+                end
                 className={({ isActive }) =>
                   `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
                     isActive ? 'bg-white text-blue-400' : 'text-white'
@@ -181,6 +183,21 @@ const Sidebar = () => {
                 <RiAdvertisementFill className='w-5 h-5' />
 
                 <span className='mx-4 font-medium'>Ask For Advertisement</span>
+              </NavLink>
+
+
+              {/* user related routes */}
+              <NavLink
+                to='user-payment-history'
+                className={({ isActive }) =>
+                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
+                    isActive ? 'bg-white text-blue-400' : 'text-white'
+                  }`
+                }
+              >
+                <GoChecklist className='w-5 h-5' />
+
+                <span className='mx-4 font-medium'>User Payment History</span>
               </NavLink>
 
             </nav>
