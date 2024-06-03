@@ -40,9 +40,10 @@ const SignUp = () => {
         const currentUser={
           email: email,
           name: name,
+          status:"Verified",
           role: role,
           profilePicture: data.data.display_url,
-          createdAt: Date.now()
+          
         }
           axiosCommon.put(`/user`,currentUser)
         

@@ -1,6 +1,13 @@
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 const UserDataRow = ({user,index}) => {
+  const axiosSecure = useAxiosSecure()
+  
+  const handleRoleChange=(role)=>{
+    console.log(role);
+
+  }
     return (
         <>
             
@@ -31,7 +38,8 @@ const UserDataRow = ({user,index}) => {
             {user.role}
         </td>
         <td>
-        <select 
+        <select
+        onChange={(e)=>handleRoleChange(e.target.value)} 
         defaultValue="default"
         className="select select-info max-w-xs">
             <option disabled value="default">Change Role</option>

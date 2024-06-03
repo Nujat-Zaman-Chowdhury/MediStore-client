@@ -47,8 +47,9 @@ const Login = () => {
               name:data?.user?.displayName,
               email:data?.user?.email,
               role: "User",
+              status:"Verified",
               profilePicture: data.user?.photoURL,
-              createdAt: Date.now()
+              
             }
             axiosCommon.put(`/user`,currentUser)
             navigate('/')

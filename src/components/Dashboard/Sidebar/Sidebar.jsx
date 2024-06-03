@@ -15,8 +15,12 @@ import { IoStatsChartSharp } from 'react-icons/io5'
 import { GiMedicines } from "react-icons/gi";
 import { RiAdvertisementFill, RiChatHistoryFill } from "react-icons/ri";
 import { GoChecklist } from "react-icons/go";
+import useRole from '../../../hooks/useRole';
+import MenuItem from './Menu/MenuItem';
 const Sidebar = () => {
   const { logOut } = useAuth()
+  const [role] = useRole()
+  console.log(role);
   const [isActive, setActive] = useState(false)
 
   // Sidebar Responsive Handler
@@ -66,139 +70,40 @@ const Sidebar = () => {
             {/*  Menu Items */}
             <nav>
               {/* dashboard home */}
-              <NavLink
-                to='/dashboard'
-                end
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5 transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <FaHome className='w-5 h-5' />
+              
+              <MenuItem label="Home" address="/dashboard" icon={FaHome}></MenuItem>
 
-                <span className='mx-4 font-medium'>Admin Home</span>
-              </NavLink>
+              {/* admin related   */}
 
-               {/* admin related   */}
+
               {/* manage users */}
-              <NavLink
-                to='manage-users'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <FaUsers className='w-5 h-5' />
+              <MenuItem label="Manage Users" address="manage-users" icon={FaUsers}></MenuItem>
 
-                <span className='mx-4 font-medium'>Manage Users</span>
-              </NavLink>
               {/* manage category */}
-              <NavLink
-                to='manage-category'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <BsFillFileEarmarkMedicalFill className='w-5 h-5' />
+              <MenuItem label="Manage Category" address="manage-category" icon={BsFillFileEarmarkMedicalFill}></MenuItem>
 
-                <span className='mx-4 font-medium'>Manage Category</span>
-              </NavLink>
+
+
               {/*payment management */}
-              <NavLink
-                to='payment-management'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <MdPayments className='w-5 h-5' />
 
-                <span className='mx-4 font-medium'>Payment management</span>
-              </NavLink>
+              <MenuItem label="Payment management" address="payment-management" icon={MdPayments}></MenuItem>
+
               {/* sales report */}
-              <NavLink
-                to='sales-report'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <IoStatsChartSharp className='w-5 h-5' />
+              <MenuItem label="Sales Report" address="sales-report" icon={IoStatsChartSharp}></MenuItem>
 
-                <span className='mx-4 font-medium'>Sales Report</span>
-              </NavLink>
               {/* manage banner advertise */}
-              <NavLink
-                to='manage-banner'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <AiFillSetting className='w-5 h-5' />
 
-                <span className='mx-4 font-medium'>Manage banner Advertise</span>
-              </NavLink>
+              <MenuItem label="Manage banner Advertise" address="manage-banner" icon={AiFillSetting}></MenuItem>
 
                {/* seller related  */}
-               <NavLink
-                to='manage-medicines'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <GiMedicines className='w-5 h-5' />
+              <MenuItem label="Manage Medicines" address="manage-medicines" icon={GiMedicines}></MenuItem>
 
-                <span className='mx-4 font-medium'>Manage Medicines</span>
-              </NavLink>
-               <NavLink
-                to='payment-history'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <RiChatHistoryFill className='w-5 h-5' />
+              <MenuItem label="Payment History" address="payment-history" icon={RiChatHistoryFill}></MenuItem>
 
-                <span className='mx-4 font-medium'>Payment History</span>
-              </NavLink>
-               <NavLink
-                to='ask-for-advertisement'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <RiAdvertisementFill className='w-5 h-5' />
-
-                <span className='mx-4 font-medium'>Ask For Advertisement</span>
-              </NavLink>
-
+              <MenuItem label="Ask For Advertisement" address="ask-for-advertisement" icon={RiAdvertisementFill}></MenuItem>
 
               {/* user related routes */}
-              <NavLink
-                to='user-payment-history'
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-2 my-5  transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white    ${
-                    isActive ? 'bg-white text-blue-400' : 'text-white'
-                  }`
-                }
-              >
-                <GoChecklist className='w-5 h-5' />
-
-                <span className='mx-4 font-medium'>User Payment History</span>
-              </NavLink>
+              <MenuItem label="User Payment History" address="user-payment-history" icon={GoChecklist}></MenuItem>
 
             </nav>
           </div>
@@ -207,24 +112,9 @@ const Sidebar = () => {
         <div>
           <hr />
 
-          
 
+          <MenuItem label="Home" address="/" icon={TbHomeHand}></MenuItem>
 
-
-
-
-          <NavLink
-            to='/'
-            className={({ isActive }) =>
-              `flex items-center px-4 py-2 my-5 text-white transition-colors duration-300 transform  hover:bg-blue-400   hover:text-white ${
-                isActive ? 'bg-white text-blue-400' : 'text-white'
-              }`
-            }
-          >
-            <TbHomeHand className='w-5 h-5' />
-
-            <span className='mx-4 font-medium'>Home</span>
-          </NavLink>
           <button
             onClick={logOut}
             className='flex w-full items-center px-4 py-2 mt-5 text-white hover:bg-blue-400   hover:text-white transition-colors duration-300 transform'
