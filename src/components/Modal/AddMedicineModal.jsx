@@ -50,7 +50,7 @@ const AddMedicineModal = ({isOpen,closeModal,setIsOpen}) => {
                   <div className='mt-2 w-full'>{/* Update room form */}</div>
                   <hr className='mt-8' />
                   <div className='mt-2 w-full'>{/* Update room form */}
-                    <AddMedicineForm setIsOpen={setIsOpen}/>
+                    <AddMedicineForm setIsOpen={setIsOpen} closeModal={closeModal}/>
                 </div>
                  
                 </DialogPanel>
