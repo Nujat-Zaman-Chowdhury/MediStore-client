@@ -1,13 +1,55 @@
+import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import UpdateUserModal from "../Modal/UpdateUserModal";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 
-const UserDataRow = ({user,index}) => {
-  const axiosSecure = useAxiosSecure()
-  
-  const handleRoleChange=(role)=>{
-    console.log(role);
-
+const UserDataRow = ({user,index,refetch}) => {
+  const {user:loggedInUser} = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+  const closeModal = ()=>{
+    setIsOpen(false)
   }
+  const axiosSecure = useAxiosSecure()
+
+
+  const {mutateAsync} = useMutation({
+    mutationFn:async(role)=>{
+      const {data} = await axiosSecure.patch(`/users/update/${user?.email}`,role)
+    },
+    onSuccess:(data)=>{
+      refetch();
+      // console.log(data);
+      toast.success("Role Updated Successfully")
+      setIsOpen(false)
+    }
+  })
+  const handleRoleChange = async(selected) => {
+    console.log(selected);
+    //  Aadmin can't change their role
+     if(loggedInUser.email === user.email){
+      toast.error("Action not allowed")
+      return setIsOpen(false)
+    }
+    
+    const userRole={
+      role: selected,
+    } 
+    try{
+      const data = await mutateAsync(userRole)
+      console.log(data); 
+      
+    }
+    catch(err){
+      console.log(err);
+      toast.error(err.message)
+      setIsOpen(false)
+    }
+  };
+  
+
     return (
         <>
             
@@ -38,15 +80,8 @@ const UserDataRow = ({user,index}) => {
             {user.role}
         </td>
         <td>
-        <select
-        onChange={(e)=>handleRoleChange(e.target.value)} 
-        defaultValue="default"
-        className="select select-info max-w-xs">
-            <option disabled value="default">Change Role</option>
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-            <option value="Seller">Seller</option>
-        </select>
+        <button onClick={()=>setIsOpen(true)}>Update Role</button>
+        <UpdateUserModal isOpen={isOpen} closeModal={closeModal} handleRoleChange={handleRoleChange} setIsOpen={setIsOpen} user={user}></UpdateUserModal>
         </td>
         
       </tr>

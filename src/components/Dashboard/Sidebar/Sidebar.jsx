@@ -1,22 +1,17 @@
 import { useState } from 'react'
 import { GrLogout } from 'react-icons/gr'
-
-import { BsFillFileEarmarkMedicalFill } from 'react-icons/bs'
-
-import { AiFillSetting, AiOutlineBars } from 'react-icons/ai'
 import { TbHomeHand } from "react-icons/tb";
-import { NavLink } from 'react-router-dom'
 import useAuth from '../../../hooks/useAuth'
 import { Link } from 'react-router-dom'
-import { MdPayments } from 'react-icons/md'
+
 import { FaHome } from 'react-icons/fa'
-import { FaUsers } from 'react-icons/fa6'
-import { IoStatsChartSharp } from 'react-icons/io5'
-import { GiMedicines } from "react-icons/gi";
-import { RiAdvertisementFill, RiChatHistoryFill } from "react-icons/ri";
-import { GoChecklist } from "react-icons/go";
+
 import useRole from '../../../hooks/useRole';
 import MenuItem from './Menu/MenuItem';
+import SellerMenu from './Menu/SellerMenu';
+import AdminMenu from './Menu/AdminMenu';
+import UserMenu from './Menu/UserMenu';
+import { AiOutlineBars } from 'react-icons/ai';
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [role] = useRole()
@@ -74,36 +69,13 @@ const Sidebar = () => {
               <MenuItem label="Home" address="/dashboard" icon={FaHome}></MenuItem>
 
               {/* admin related   */}
-
-
-              {/* manage users */}
-              <MenuItem label="Manage Users" address="manage-users" icon={FaUsers}></MenuItem>
-
-              {/* manage category */}
-              <MenuItem label="Manage Category" address="manage-category" icon={BsFillFileEarmarkMedicalFill}></MenuItem>
-
-
-
-              {/*payment management */}
-
-              <MenuItem label="Payment management" address="payment-management" icon={MdPayments}></MenuItem>
-
-              {/* sales report */}
-              <MenuItem label="Sales Report" address="sales-report" icon={IoStatsChartSharp}></MenuItem>
-
-              {/* manage banner advertise */}
-
-              <MenuItem label="Manage banner Advertise" address="manage-banner" icon={AiFillSetting}></MenuItem>
+              {role === 'Admin' && <AdminMenu></AdminMenu>}
 
                {/* seller related  */}
-              <MenuItem label="Manage Medicines" address="manage-medicines" icon={GiMedicines}></MenuItem>
-
-              <MenuItem label="Payment History" address="payment-history" icon={RiChatHistoryFill}></MenuItem>
-
-              <MenuItem label="Ask For Advertisement" address="ask-for-advertisement" icon={RiAdvertisementFill}></MenuItem>
+               {role === 'Seller' && <SellerMenu></SellerMenu>}
 
               {/* user related routes */}
-              <MenuItem label="User Payment History" address="user-payment-history" icon={GoChecklist}></MenuItem>
+              {role === 'User' && <UserMenu></UserMenu>}
 
             </nav>
           </div>
