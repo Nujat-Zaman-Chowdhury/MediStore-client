@@ -1,34 +1,34 @@
 
 
-const UserDataRow = () => {
+const UserDataRow = ({user,index}) => {
     return (
         <>
             
       <tr>
         <th>
-          1
+          {index+1}
         </th>
         <td>
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle w-12 h-12">
-                <img src="https://img.daisyui.com/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+                <img src={user.profilePicture} />
               </div>
             </div>
           </div>
         </td>
         <td>
             {/* name */}
-          Zemlak, Daniel and Leannon
+          {user.name}
          
         </td>
         <td>
             {/*Email */}
-            email
+            {user.email}
         </td>
         <td>
             {/*role */}
-            user
+            {user.role}
         </td>
         <td>
         <select 
@@ -38,7 +38,7 @@ const UserDataRow = () => {
             <option value="Admin">Admin</option>
             <option value="User">User</option>
             <option value="Seller">Seller</option>
-     </select>
+        </select>
         </td>
         
       </tr>

@@ -10,7 +10,6 @@ import ManageCategory from "../Providers/Dashboard/Admin/ManageCategory";
 import PaymentManagement from "../Providers/Dashboard/Admin/PaymentManagement";
 import SalesReport from "../Providers/Dashboard/Admin/SalesReport";
 import ManageBannerAdvertise from "../Providers/Dashboard/Admin/ManageBannerAdvertise";
-import AdminHomePage from "../Providers/Dashboard/Admin/AdminHomePage";
 import DashboardHome from "../Providers/Dashboard/Common/DashboardHome";
 import ManageMedicines from "../Providers/Dashboard/Seller/ManageMedicines";
 import PaymentHistory from "../Providers/Dashboard/Seller/PaymentHistory";
@@ -65,7 +64,7 @@ export const router = createBrowserRouter([
             //seller related routes
             {
                 path:"manage-medicines",
-                element:<ManageMedicines    ></ManageMedicines>
+                element:<ManageMedicines></ManageMedicines>
             },
             {
                 path:"payment-history",
@@ -76,16 +75,12 @@ export const router = createBrowserRouter([
                 element:<AskForAdvertisement></AskForAdvertisement>
             },
 
-
-
             //user related routes
             {
                 path:"user-payment-history",
                 element:<UserPaymentHistory></UserPaymentHistory>
             },
-            
-    
-    
+
     ]
         
     }
