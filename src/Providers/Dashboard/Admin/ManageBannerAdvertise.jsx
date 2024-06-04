@@ -1,8 +1,22 @@
 import { Helmet } from "react-helmet-async";
 import BannerAdvertiseRow from "../../../components/TableRow/BannerAdvertiseRow";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 const ManageBannerAdvertise = () => {
+    const axiosSecure = useAxiosSecure()
+
+    //get all advertissemtnt
+    const {data: advertisements,isLoading} = useQuery({
+      queryKey:['advertisements'],
+      queryFn:async()=>{
+        const {data} = await axiosSecure('/advertisements')
+        return data;
+      }
+    })
+
+    if(isLoading)  return <p>Loading....</p>
     return (
         <div>
             <Helmet>
@@ -22,7 +36,7 @@ const ManageBannerAdvertise = () => {
       </tr>
     </thead>
     <tbody>
-      <BannerAdvertiseRow/>
+      {advertisements.map(advertisement=><BannerAdvertiseRow key={advertisement?._id} advertisement={advertisement}/>)}
 
     </tbody>
   </table>

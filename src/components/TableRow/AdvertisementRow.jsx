@@ -7,10 +7,10 @@ const AdvertisementRow = ({advertisement}) => {
         <>
       <tr>
         <th>
-          <img src={advertisement.image} alt=""  className="w-60"/>
+          <img src={advertisement.image} alt=""  className="w-44"/>
         </th>
-        <td>{advertisement.description}</td>
-        <td>{advertisement.status}</td>
+        <td className="w-[300px]">{advertisement.description}</td>
+        <td className={`${advertisement?.status === 'In Slide'? ' text-blue-400': ' text-red-400' }`}>{advertisement.status}</td>
       </tr>
         </>
     );

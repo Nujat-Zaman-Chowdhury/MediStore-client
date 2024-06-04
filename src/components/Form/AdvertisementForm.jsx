@@ -37,6 +37,7 @@ const AdvertisementForm = () => {
       console.log(res.data.insertedId);
       if(res.data.insertedId){
         toast.success("Advertisement Request Send to Admin")
+        
       }
 
 
