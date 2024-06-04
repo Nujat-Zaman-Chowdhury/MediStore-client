@@ -1,11 +1,16 @@
 
-const AdvertisementRow = () => {
+const AdvertisementRow = ({advertisement}) => {
+
+
+  
     return (
         <>
       <tr>
-        <th>medicine name</th>
-        <td>description</td>
-        <td>In slider / Not in slider</td>
+        <th>
+          <img src={advertisement.image} alt=""  className="w-60"/>
+        </th>
+        <td>{advertisement.description}</td>
+        <td>{advertisement.status}</td>
       </tr>
         </>
     );

@@ -129,10 +129,11 @@ const UpdateUserModal = ({isOpen,closeModal,handleRoleChange,setIsOpen,user}) =>
       </Transition>
     );
 };
-// UpdateUserModal.propTypes = {
-//     user: PropTypes.object,
-//     modalHandler: PropTypes.func,
-//     setIsOpen: PropTypes.func,
-//     isOpen: PropTypes.bool,
-//   }
+UpdateUserModal.propTypes = {
+    user: PropTypes.object,
+    handleRoleChange: PropTypes.func,
+    setIsOpen: PropTypes.func,
+    closeModal: PropTypes.func,
+    isOpen: PropTypes.bool,
+  }
 export default UpdateUserModal;

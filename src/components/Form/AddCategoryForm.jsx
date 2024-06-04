@@ -5,8 +5,8 @@ const AddCategoryForm = ({ setIsOpen }) => {
         <form className="space-y-3 my-3">
           <label className="input input-bordered border-blue-500 flex items-center gap-2 text-blue-500 font-outfit font-medium">
             Category Name:
-            <input type="text" className="grow" placeholder="Category Image" />
-          </label>
+            <input  {...register("image", { required: true })} type="text" className="grow" placeholder="Category Image" />
+          </label> 
           <label className="input input-bordered border-blue-500 flex items-center gap-2 text-blue-500  font-outfit font-mediumfocus:outline-blue-400">
             Category Image:
             <input type="url" className="grow" placeholder="Category image" />

@@ -16,15 +16,17 @@ const ManageMedicines = () => {
   };
 
   //get medicines
-  const {data: medicines=[],isLoading} = useQuery({
+  const {data: medicines=[],isLoading,refetch} = useQuery({
     queryKey:['medicines',user?.email],
     queryFn:async()=>{
+     
       const {data} = await axiosSecure.get(`/medicines/${user?.email}`)
+      refetch();
       return data;
     } 
   })
   
-
+  if(isLoading) return <p>Loading...</p>
   return (
     <div>
         <Helmet>

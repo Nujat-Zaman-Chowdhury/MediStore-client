@@ -4,6 +4,7 @@ import UpdateUserModal from "../Modal/UpdateUserModal";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import PropTypes from 'prop-types'
 
 
 const UserDataRow = ({user,index,refetch}) => {
@@ -88,5 +89,11 @@ const UserDataRow = ({user,index,refetch}) => {
         </>
     );
 };
+UserDataRow.propTypes = {
+  user: PropTypes.object,
+  index: PropTypes.number,
+  refetch: PropTypes.func,
+ 
+}
 
 export default UserDataRow;
