@@ -11,23 +11,49 @@ import 'swiper/css/navigation';
 
 
 // import required modules
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation,Autoplay } from 'swiper/modules';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosCommon from '../../hooks/useAxiosCommon';
 const Slides = () => {
+  const axiosCommon = useAxiosCommon()
+  //get slider by status 
+const {data: slides=[]} = useQuery({
+  queryKey:['slides'],
+  queryFn:async()=>{
+    const {data} = await axiosCommon('/advertisements')
+    return data;
+  }
+})
+const bannerSlides = slides.filter(slide=>slide.status === 'In Slide')
+// console.log(bannerSlides);
     return (
-        <>
+      <>
       <Swiper
+        spaceBetween={30}
+        centeredSlides={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         pagination={{
-          type: 'progressbar',
+          clickable: true,
         }}
         navigation={true}
-        modules={[Pagination, Navigation]}
-        className="mySwiper"
+        modules={[Autoplay, Pagination, Navigation]}
+        className="mySwiper my-32"
       >
-        <SwiperSlide>
-          <div className="bg-[url('https://i.ibb.co/gwV1tR6/slide1.jpg')] h-[500px] w-full bg-cover bg-center bg-no-repeat">
-
-          </div>
-        </SwiperSlide>
+        {
+          bannerSlides.map(slide=><SwiperSlide key={slide._id}>
+            <div className='bg-sky-300  h-[600px] rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 flex justify-center items-center'>
+              <div>
+                  <h1>{slide.description}</h1>
+              </div>
+              <div>
+                  <img src={slide.image} className='w-full h-full' alt="" />
+              </div>
+            </div>
+          </SwiperSlide>)
+        }
         
       </Swiper>
     </>
