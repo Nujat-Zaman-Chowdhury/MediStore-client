@@ -1,7 +1,11 @@
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../utils";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
 
-const AddCategoryForm = ({ setIsOpen }) => {
+const AddCategoryForm = ({ setIsOpen,closeModal }) => {
+  const axiosSecure = useAxiosSecure()
   const {
     register,
     watch,
@@ -9,23 +13,36 @@ const AddCategoryForm = ({ setIsOpen }) => {
     formState: { errors },
   } = useForm();
 
+  const {mutateAsync} = useMutation({
+    mutationFn:async(categoryData)=>{
+      const {data} = await axiosSecure.post('/category',categoryData)
+      return data;
+    },
+    onSuccess:()=>{
+      console.log("category data posted");
+      closeModal()
+      toast.success("Added successfully")
+    }
+  })
+
   const onSubmit = async (data) => {
     
+    const image_url = await imageUpload(data.image[0]);
     try {
-      const image_url = await imageUpload(data.image[0]);
       
       const categoryData = {
         ...data,
         image: image_url,
         
       };
+
+      //save category to db
+      await mutateAsync(categoryData)
       
-
-
 
     } catch (err) {
       console.log(err);
-      // toast.error(err.message)
+      toast.error(err.message)
     }
   };
   return (
