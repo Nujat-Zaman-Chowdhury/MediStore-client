@@ -15,16 +15,24 @@ import ManageMedicines from "../Providers/Dashboard/Seller/ManageMedicines";
 import PaymentHistory from "../Providers/Dashboard/Seller/PaymentHistory";
 import AskForAdvertisement from "../Providers/Dashboard/Seller/AskForAdvertisement";
 import UserPaymentHistory from "../Providers/Dashboard/User/UserPaymentHistory";
+import CategoryCardDetails from "../pages/Home/CategoryCardSection/CategoryCardDetails";
 
 export const router = createBrowserRouter([
     {
         path:'/',
         errorElement:<ErrorPage></ErrorPage>,
         element:<Main></Main>,
-        children:[{
+        children:[
+            {
             path:'/',
-            element:<Home></Home>
-        }]
+            element:<Home></Home>,
+            
+        },
+        {
+            path:'/category-details',
+            element:<CategoryCardDetails></CategoryCardDetails>
+        }
+    ]
     },
     {path:'/login', element:<Login/>},
     {path:'/sign-up', element:<SignUp/>},
