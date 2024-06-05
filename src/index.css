@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.first-letter-blue::first-letter {
+    color: blue;
+    font-size: 50px;
+  }

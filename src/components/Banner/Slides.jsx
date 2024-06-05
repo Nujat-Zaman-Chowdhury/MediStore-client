@@ -44,13 +44,13 @@ const bannerSlides = slides.filter(slide=>slide.status === 'In Slide')
       >
         {
           bannerSlides.map(slide=><SwiperSlide key={slide._id}>
-            <div className='bg-sky-400 h-[600px] w-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 '>
-              <div className='flex justify-center items-center h-full mx-auto  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 px-10'>
-              <div className='w-3/6 mx-auto'>
-                  <p className='text-3xl font-medium text-[#121212] font-poppins'>{slide.description}</p>
+            <div className='h-full lg:h-[600px] bg-[url("https://i.ibb.co/yQ6T3SV/2.webp")] bg-cover bg-no-repeat rounded overflow-hidden'>
+              <div className='flex flex-col lg:flex-row justify-center items-center h-full mx-auto py-6 lg:py-0 px-5 md:px-20'>
+              <div className='w-full lg:w-4/6  mx-auto flex justify-center items-center'>
+                  <p className='text-xl md:text-3xl font-medium text-[#121212] font-outfit first-letter-blue'>{slide.description}</p>
               </div>
               <div className='mx-auto'>
-                  <img src={slide.image} className='w-full h-full' alt="" />
+                  <img src={slide.image} className='w-full h-full object-cover' alt="" />
               </div>
               </div>
             </div>
