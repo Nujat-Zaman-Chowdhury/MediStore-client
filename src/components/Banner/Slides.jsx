@@ -40,16 +40,18 @@ const bannerSlides = slides.filter(slide=>slide.status === 'In Slide')
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper my-32"
+        className="mySwiper"
       >
         {
           bannerSlides.map(slide=><SwiperSlide key={slide._id}>
-            <div className='bg-sky-300  h-[600px] rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 flex justify-center items-center'>
-              <div>
-                  <h1>{slide.description}</h1>
+            <div className='bg-sky-400 h-[600px] w-full bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 '>
+              <div className='flex justify-center items-center h-full mx-auto  rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 px-10'>
+              <div className='w-3/6 mx-auto'>
+                  <p className='text-3xl font-medium text-[#121212] font-poppins'>{slide.description}</p>
               </div>
-              <div>
+              <div className='mx-auto'>
                   <img src={slide.image} className='w-full h-full' alt="" />
+              </div>
               </div>
             </div>
           </SwiperSlide>)

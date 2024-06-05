@@ -15,10 +15,14 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
         handleSubmit,
         formState: { errors },
       } = useForm();
+
+
+
     const onSubmit = async (data) => {
-    
+        console.log(categoryData)
+        setLoading(true)
         // const image_url = await imageUpload(data.image[0]);
-        const updatedCategoryData = Object.assign(categoryData)
+        const updatedCategoryData = Object.assign({},categoryData)
         console.log(updatedCategoryData);
         delete updatedCategoryData._id
         try {
@@ -27,6 +31,7 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
     
           //save category to db
           const {data} = await axiosSecure.put(`/category/update/${category?._id}`,updatedCategoryData)
+          // console.log(data);
           refetch();
           setLoading(false)
           setIsEditModalOpen(false)
@@ -38,13 +43,17 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
           toast.error(err.message)
         }
       };
+
+      
       const handleImage =async image =>{
+        console.log(image);
         setLoading(true)
         try{
             const image_url = await imageUpload(image)
+            console.log(image_url);
             setCategoryData({...categoryData, image:image_url})
             setLoading(false)
-            setIsEditModalOpen(false)
+            
         }
         catch(err){
             console.log(err);
@@ -52,13 +61,14 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
             toast.error(err.message)
         }
     }
+console.log(categoryData);
     return (
         <div className="w-full flex flex-col justify-center  text-gray-800 rounded-xl bg-white">
       <div className="mt-2 ">
         <form className="space-y-3 my-3 w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-1 text-sm w-1/2 mx-auto">
               <label htmlFor="category" className="block text-gray-600">
-                Category Name
+                Category 
               </label>
               <select
                 {...register("category")}

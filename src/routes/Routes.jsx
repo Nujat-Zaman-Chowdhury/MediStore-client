@@ -16,6 +16,7 @@ import PaymentHistory from "../Providers/Dashboard/Seller/PaymentHistory";
 import AskForAdvertisement from "../Providers/Dashboard/Seller/AskForAdvertisement";
 import UserPaymentHistory from "../Providers/Dashboard/User/UserPaymentHistory";
 import CategoryCardDetails from "../pages/Home/CategoryCardSection/CategoryCardDetails";
+import ShopPage from "../pages/ShopPage/ShopPage";
 
 export const router = createBrowserRouter([
     {
@@ -29,8 +30,12 @@ export const router = createBrowserRouter([
             
         },
         {
-            path:'/category-details',
+            path:'/category-details/:category',
             element:<CategoryCardDetails></CategoryCardDetails>
+        },
+        {
+            path:'/shop-page',
+            element:<ShopPage></ShopPage>
         }
     ]
     },
