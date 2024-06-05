@@ -18,11 +18,11 @@ const BlogSection = () => {
                 <button className="btn bg-blue-400 text-white rounded-full hover:text-blue-400 hover:border-blue-400 hover:bg-white">Load More</button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-10">
-            {blogs.map((blog)=>(<div key={blog.id} className="flex gap-4">
+            {blogs.map((blog)=>(<div key={blog.id} className="flex flex-col lg:flex-row gap-4">
                 <div className="">
                     <img src={blog.image} alt="" className="w-80 h-80 object-cover rounded-md"/>
                 </div>
-                <div className="w-1/2 h-full space-y-3 flex  items-center">
+                <div className="w-full lg:w-1/2 h-full space-y-3 flex  items-center">
                     <div className="">
                     <div className="bg-blue-400 text-white flex items-center justify-center w-28 p-2 rounded-full mb-4">
                         <p className="text-lg font-poppins">{blog.category}</p>

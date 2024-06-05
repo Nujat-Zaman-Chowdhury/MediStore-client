@@ -2,9 +2,9 @@ import img1 from "../../../assets/img1.avif";
 const ProfessionalSection = () => {
   return (
     <div className="flex flex-col md:flex-row gap-6 my-10 container mx-auto items-center">
-      <div className="w-1/2 h-full">
+      <div className="lg:w-1/2 h-full">
         <div className="space-y-4">
-          <h1 className="md:text-3xl font-bold text-blue-500 font-poppins">Excellent Medical Professionals With Significant Experience</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-blue-500 font-poppins">Excellent Medical Professionals With Significant Experience</h1>
           <p className="text-lg text-slate-600 font-outfit">
             At the core of our commitment to providing exceptional healthcare
             services lies our team of outstanding medical professionals with
@@ -15,7 +15,7 @@ const ProfessionalSection = () => {
       </div>
       <div className="relative h-full">
         <img src={img1} alt="" className="object-cover h-[400px]" />
-        <div className="w-full absolute -bottom-6 flex gap-2 justify-center items-center">
+        <div className="w-full absolute -bottom-6 hidden lg:flex  gap-2 justify-center items-center">
           <div>
             <div className="flex gap-2 items-center p-4 bg-white shadow-md rounded">
               <svg
