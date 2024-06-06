@@ -48,11 +48,11 @@ const DiscountProducts = () => {
         {discountProducts.map((product) => (
           <SwiperSlide className="" key={product.key}>
             <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl my-10 mx-auto">
-              <div className="flex flex-col mx-auto p-3 relative">
+              <div className="flex flex-col mx-auto p-3 relative shadow">
                 <img
                   src={product?.image}
                   alt="Product"
-                  className="h-72 w-72 object-cover rounded  mx-auto "
+                  className="h-72 w-72 object-cover rounded  mx-auto shadow"
                 />
                 <div className="w-12 h-12 rounded-full text-white font-poppins font-semibold bg-blue-400 flex justify-center items-center absolute left-5 top-5">
                 <p>{product?.discountPercentage}%</p>
