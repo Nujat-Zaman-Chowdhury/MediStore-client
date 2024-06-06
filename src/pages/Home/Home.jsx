@@ -1,6 +1,7 @@
 import Slides from "../../components/Banner/Slides";
 import BlogSection from "./BlogSection/BlogSection";
 import CategoryCard from "./CategoryCardSection/CategoryCard";
+import DiscountProducts from "./DiscountProducts/DiscountProducts";
 import ProfessionalSection from "./ProfessionalSection/ProfessionalSection";
 
 
@@ -10,6 +11,7 @@ const Home = () => {
             <Slides></Slides>
             <div className=" p-3 lg:p-0">
             <CategoryCard></CategoryCard>
+            <DiscountProducts></DiscountProducts>
             <ProfessionalSection></ProfessionalSection>
             <BlogSection></BlogSection>
             </div>
