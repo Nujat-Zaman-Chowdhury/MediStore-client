@@ -7,6 +7,7 @@ const useCart = () => {
     const axiosSecure = useAxiosSecure();
     const {user} = useAuth()
     // console.log(user);
+    
     const {data: cart=[],refetch,isLoading} = useQuery({
         enabled:!!user?.email,
         queryKey:['cart', user?.email],

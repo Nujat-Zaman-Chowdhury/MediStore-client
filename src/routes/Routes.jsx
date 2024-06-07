@@ -19,6 +19,7 @@ import CategoryCardDetails from "../pages/Home/CategoryCardSection/CategoryCardD
 import ShopPage from "../pages/ShopPage/ShopPage";
 import CartPage from "../pages/CartPage/CartPage";
 import InvoicePage from "../pages/InvoicePage/InvoicePage";
+import CheckOut from "../pages/CheckOutPage/CheckOut";
 
 export const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
         {
             path:'/invoice-page',
             element:<InvoicePage></InvoicePage>
+        },
+        {
+            path:'/checkout',
+            element:<CheckOut></CheckOut>
         }
     ]
     },
