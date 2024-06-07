@@ -29,6 +29,7 @@ const ShopPageRow = ({medicine,setIsOpen,setSelectedMedicine,selectedMedicine}) 
       const {_id, ...medicineInfo} = medicine;
       const cartItem ={
         medicineId: medicine?._id,
+        quantity: 1,
         buyer: {
           email: user?.email,
           name:user?.displayName,

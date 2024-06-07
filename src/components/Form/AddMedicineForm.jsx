@@ -24,7 +24,7 @@ const AddMedicineForm = ({closeModal}) => {
       return data;
     },
     onSuccess:()=>{
-      console.log("medicine data posted");
+      // console.log("medicine data posted");
       closeModal()
       toast.success("Medicine added successfully")
     }
@@ -222,20 +222,6 @@ const AddMedicineForm = ({closeModal}) => {
                   id="discountPercentage"
                   type="text"
                   placeholder="Discount"
-                  required
-                />
-              </div>
-              <div className="space-y-1 text-sm">
-                <label htmlFor="price" className="block text-gray-600">
-                  Quantity
-                </label>
-                <input
-                  {...register("quantity", { required: true })}
-                  className="w-full px-4 py-3 text-gray-800 border border-blue-300 focus:outline-blue-500 rounded-md "
-                  name="quantity"
-                  id="quantity"
-                  type="text"
-                  placeholder="Quantity"
                   required
                 />
               </div>

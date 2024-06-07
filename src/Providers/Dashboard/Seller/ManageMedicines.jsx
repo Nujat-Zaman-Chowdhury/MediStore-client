@@ -8,7 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const ManageMedicines = () => {
   const {user,loading} = useAuth()
-  console.log(user);
+  // console.log(user);
   const axiosSecure = useAxiosSecure()
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => {

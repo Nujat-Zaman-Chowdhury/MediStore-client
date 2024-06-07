@@ -17,6 +17,8 @@ import AskForAdvertisement from "../Providers/Dashboard/Seller/AskForAdvertiseme
 import UserPaymentHistory from "../Providers/Dashboard/User/UserPaymentHistory";
 import CategoryCardDetails from "../pages/Home/CategoryCardSection/CategoryCardDetails";
 import ShopPage from "../pages/ShopPage/ShopPage";
+import CartPage from "../pages/CartPage/CartPage";
+import InvoicePage from "../pages/InvoicePage/InvoicePage";
 
 export const router = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ export const router = createBrowserRouter([
         {
             path:'/shop-page',
             element:<ShopPage></ShopPage>
+        },
+        {
+            path:'/cart-page',
+            element:<CartPage></CartPage>
+        },
+        {
+            path:'/invoice-page',
+            element:<InvoicePage></InvoicePage>
         }
     ]
     },

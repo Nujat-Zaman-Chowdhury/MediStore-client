@@ -11,7 +11,7 @@ const LoadingSpinner = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <FaSpinner size={100} color='blue' />
+      <FaSpinner className='animate-spin' size={80} color='skyblue' />
     </div>
   )
 }
