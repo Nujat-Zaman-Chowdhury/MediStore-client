@@ -85,13 +85,24 @@ const CheckoutForm = () => {
 
         //now save the payment in db
         const payment = {
-          email: user.email,
+          email: user?.email,
           price: totalPrice,
           transactionId: paymentIntent.id,
           date: new Date(),
           cartIds: cart.map((item) => item._id),
           medicineItemIds: cart.map((item) => item.medicineId),
           status: "pending",
+          buyer:{
+            email:user?.email,
+            name:user?.name,
+            profilePicture: user?.photoURL
+          },
+          sellers:cart.map((item=>({
+            name: item.seller.name,
+            email:item.seller.email,
+            profilePicture:item.seller.profilePicture
+          })))
+          
         };
         console.log(payment);
         const res = await axiosSecure.post("/payments", payment);

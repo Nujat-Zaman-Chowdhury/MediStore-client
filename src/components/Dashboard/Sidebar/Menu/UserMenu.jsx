@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 const UserMenu = () => {
     return (
         <>
-           <MenuItem label="User Payment History" address="user-payment-history" icon={GoChecklist}></MenuItem> 
+           <MenuItem label="Payment History" address="user-payment-history" icon={GoChecklist}></MenuItem> 
         </>
     );
 };

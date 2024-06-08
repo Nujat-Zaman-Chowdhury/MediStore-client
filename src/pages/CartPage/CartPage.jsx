@@ -27,6 +27,15 @@ const CartPage = () => {
     });
     updateCart(id, updatedCart.find(item => item._id === id).quantity);
   };
+  const handleDecrease = (id) => {
+    const updatedCart = cart.map((item) => {
+      if (item._id === id) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    updateCart(id, updatedCart.find(item => item._id === id).quantity);
+  };
   
   const updateCart = async (id,quantity) => {
     try {
@@ -135,8 +144,9 @@ const CartPage = () => {
                     <td>{medicine?.pricePerUnit}</td>
                     <td>
                       <button
-                       
-                        className="bg-blue-300 text-white px-3 rounded text-lg font-bold m-2"
+                      disabled={medicine.quantity===1}
+                       onClick={()=>handleDecrease(medicine._id)}
+                        className="bg-blue-300 text-white px-3 rounded text-lg font-bold m-2 disabled:cursor-not-allowed"
                       >
                         -
                       </button>
