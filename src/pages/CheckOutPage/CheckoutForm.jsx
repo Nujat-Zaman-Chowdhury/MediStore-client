@@ -5,11 +5,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import useCart from "../../hooks/useCart";
 import Swal from "sweetalert2";
+
 import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -116,7 +118,7 @@ const CheckoutForm = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-            navigate('/dashboard/user-payment-history')
+          navigate(`/invoice-page/${paymentIntent.id}`);
         }
       }
     }
@@ -148,11 +150,8 @@ const CheckoutForm = () => {
         >
           Pay
         </button>
-        <div className="mt-3 flex flex-col justify-center">
+        <div className="mt-3 flex  justify-center">
         <p className="text-red-600 my-3">{error}</p>
-        {
-        transactionId && <p className="text-green-600">Your transaction id: {transactionId}</p>
-      }
         </div>
       </div>
     </form>

@@ -45,10 +45,6 @@ export const router = createBrowserRouter([
             element:<CartPage></CartPage>
         },
         {
-            path:'/invoice-page',
-            element:<InvoicePage></InvoicePage>
-        },
-        {
             path:'/checkout',
             element:<CheckOut></CheckOut>
         }
@@ -56,6 +52,8 @@ export const router = createBrowserRouter([
     },
     {path:'/login', element:<Login/>},
     {path:'/sign-up', element:<SignUp/>},
+    
+    {path:'/invoice-page/:transactionId',element:<InvoicePage></InvoicePage>},
 
     {
         path:'/dashboard',
