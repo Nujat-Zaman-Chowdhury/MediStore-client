@@ -21,7 +21,7 @@ const InvoicePage = () => {
              return data;
         }
     })
-    console.log(payment);
+    // console.log(payment);
 
     return (
         <>

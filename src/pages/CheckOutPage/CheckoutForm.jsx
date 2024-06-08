@@ -83,32 +83,33 @@ const CheckoutForm = () => {
       console.log("PaymentIntent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         setTransactionId(paymentIntent.id);
-        console.log("transaction id:", paymentIntent.id);
+        // console.log("transaction id:", paymentIntent.id);
 
         //now save the payment in db
-        const payment = {
+        const paymentInfo = {
+          items: cart,
           email: user?.email,
           price: totalPrice,
           transactionId: paymentIntent.id,
           date: new Date(),
           cartIds: cart.map((item) => item._id),
-          medicineItemIds: cart.map((item) => item.medicineId),
+          // medicineItemIds: cart.map((item) => item.medicineId),
           status: "pending",
           buyer:{
             email:user?.email,
             name:user?.name,
             profilePicture: user?.photoURL
           },
-          sellers:cart.map((item=>({
-            name: item.seller.name,
-            email:item.seller.email,
-            profilePicture:item.seller.profilePicture
-          })))
+          // sellers:cart.map((item=>({
+          //   name: item.seller.name,
+          //   email:item.seller.email,
+          //   profilePicture:item.seller.profilePicture
+          // })))
           
         };
-        console.log(payment);
-        const res = await axiosSecure.post("/payments", payment);
-        console.log("Payment save", res.data);
+        // console.log(payment);
+        const res = await axiosSecure.post("/payments", paymentInfo);
+        // console.log("Payment save", res.data);
         refetch();
         if (res.data?.paymentResult?.insertedId) {
           Swal.fire({
@@ -119,6 +120,7 @@ const CheckoutForm = () => {
             timer: 1500,
           });
           navigate(`/invoice-page/${paymentIntent.id}`);
+          
         }
       }
     }

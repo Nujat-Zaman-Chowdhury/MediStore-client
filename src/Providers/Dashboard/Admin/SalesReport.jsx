@@ -1,34 +1,80 @@
 import { Helmet } from "react-helmet-async";
 import SalesReportRow from "../../../components/TableRow/SalesReportRow";
-
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
+import  {useRef} from 'react';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+import  { useState } from "react";
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css";
 
 const SalesReport = () => {
-    return (
-        <div>
-            <Helmet>
-                <title>Sales Report | Dashboard</title>
-            </Helmet>
-            <h2>Sales Report</h2>
-            <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-            <th>Medicine Name</th>
-            <th>Seller Email</th>
-            <th>Buyer Email</th>
-            <th>Total Price</th>
-            <th>Created At</th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <SalesReportRow/>
-    </tbody>
-  </table>
-</div>
-        </div>
-    );
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const tableRef = useRef(null);
+  const axiosSecure = useAxiosSecure();
+  const { data: sales = [], isLoading } = useQuery({
+    queryKey: ["sales"],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/payments`);
+      return data;
+    },
+  });
+  
+
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
+  return (
+    <div>
+      <Helmet>
+        <title>Sales Report | Dashboard</title>
+      </Helmet>
+      <div className="flex justify-between items-center">
+      <div>
+      <h2 className="text-3xl font-out font-bold my-2">Sales Report</h2>
+      <p className="font-poppins">
+        Total : <span className="text-blue-400 mb-3">{sales.length}</span>
+      </p>
+
+      </div>
+      <div>
+      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      <span className="mx-2">to</span>
+      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
+      </div>
+     
+      <DownloadTableExcel
+                    filename="sales-report table"
+                    sheet="sales-report"
+                    currentTableRef={tableRef.current}
+                >
+
+                   <button className="btn rounded-none bg-white  hover:bg-white hover:border-red-500 hover:text-red-500 hover:underline border border-red-500 text-red-500"> Export excel </button>
+
+                </DownloadTableExcel>
+      </div>
+      <div className="overflow-x-auto my-6" ref={tableRef}>
+        <table className="table border">
+          {/* head */}
+          <thead className="bg-blue-400 text-white  font-outfit uppercase">
+            <tr>
+              <th className="w-1/3">Medicine Name</th>
+              <th className="text-center">Seller Email</th>
+              <th className="text-center">Buyer Email</th>
+              <th className="text-center">Date</th>
+              <th className="text-center">Total Price</th>
+            </tr>
+          </thead>
+          <tbody>  
+            {/* row 1 */}
+            {sales.map((sale, index) => (
+              <SalesReportRow sale={sale} key={index} />
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 };
 
 export default SalesReport;
