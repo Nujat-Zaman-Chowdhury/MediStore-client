@@ -1,13 +1,13 @@
 
 
-const PaymentHistoryRow = () => {
+const PaymentHistoryRow = ({payment}) => {
     return (
         <>
         <tr>
-        <th>medicine name</th>
-        <td>buyer email</td>
-        <td>total price</td>
-        <td>paid or pending</td>
+        <th>{new Date(payment?.date).toLocaleDateString()}</th>
+        <td>{payment?.buyer.email}</td>
+        <td>{payment?.transactionId}</td>
+        <td className={`${payment.status === 'pending'? 'text-red-500': 'text-blue-500'}`}>{payment?.status}</td>
       </tr> 
         </>
     );

@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const ManageMedicines = () => {
   const {user,loading} = useAuth()
@@ -21,12 +22,14 @@ const ManageMedicines = () => {
     queryFn:async()=>{
      
       const {data} = await axiosSecure.get(`/medicines/${user?.email}`)
-      refetch();
+      
       return data;
     } 
   })
+
   
-  if(isLoading) return <p>Loading...</p>
+  
+  if(isLoading) return <LoadingSpinner></LoadingSpinner>
   return (
     <div>
         <Helmet>
@@ -63,7 +66,7 @@ const ManageMedicines = () => {
             </tr>
           </thead>
           <tbody>
-            {medicines.map(medicine=><ManageMedicinesRow key={medicine._id} medicine={medicine} isLoading={isLoading} loading={loading}/>)}
+            {medicines.map(medicine=><ManageMedicinesRow key={medicine._id} medicine={medicine} isLoading={isLoading} loading={loading} refetch={refetch}/>)}
           </tbody>
         </table>
       </div>

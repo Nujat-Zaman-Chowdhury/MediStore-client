@@ -1,13 +1,13 @@
 const ManageMedicinesRow = ({medicine,isLoading,loading}) => {
-  if(isLoading || loading) return <p>Loading</p>
+  
   return (
     <>
       {/* row 1 */}
       <tr className="bg-base-200">
         <td>{medicine.name}</td>
-        <td>{medicine.genericName}</td>
-        <td>medicine.description</td>
-        <td>{medicine.category}</td>
+        <td>{medicine['generic-name']}</td>
+        <td>{medicine.description}</td>
+        <td className="">{medicine.category}</td>
         {/* <td>medicine.company</td>
         <td>medicine.unitMass</td> */}
         <td>{medicine.pricePerUnit}</td>
