@@ -8,7 +8,7 @@ import {
   import { Fragment } from 'react'
 import AdvertisementForm from '../Form/AdvertisementForm';
 
-const AdvertisementModal = ({isOpen,closeModal}) => {
+const AdvertisementModal = ({isOpen,closeModal,refetch,setIsOpen}) => {
     return (
         <Transition appear show={isOpen} as={Fragment}>
         <Dialog
@@ -46,8 +46,8 @@ const AdvertisementModal = ({isOpen,closeModal}) => {
                   >
                     Request For Advertisement
                   </DialogTitle>
-                  <div className='mt-2 w-full'>{/* Update room form */}</div>
-                 <AdvertisementForm></AdvertisementForm>
+                  <div className='mt-2 w-full'></div>
+                 <AdvertisementForm setIsOpen={setIsOpen} isOpen={isOpen} closeModal={closeModal} refetch={refetch}></AdvertisementForm>
                  
                 </DialogPanel>
               </TransitionChild>

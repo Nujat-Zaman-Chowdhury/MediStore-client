@@ -22,6 +22,9 @@ const ShopPage = () => {
   const [search, setSearch] = useState("");
   const [searchText, setSearchText] = useState("");
 
+  //sort
+  const [sort,setSort] = useState('')
+
   const closeModal = () => {
     setIsOpen(false);
     setSelectedMedicine(null);
@@ -32,10 +35,10 @@ const ShopPage = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["medicines", currentPage, itemsPerPage, search],
+    queryKey: ["medicines", currentPage, itemsPerPage, search,sort],
     queryFn: async () => {
       const { data } = await axiosCommon(
-        `/medicines?page=${currentPage}&size=${itemsPerPage}&search=${search}`
+        `/medicines?page=${currentPage}&size=${itemsPerPage}&search=${search}&sort=${sort}`
       );
       return data;
     },
@@ -46,7 +49,7 @@ const ShopPage = () => {
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axiosCommon(
-        `${import.meta.env.VITE_API_URL}/medicines-count?&search=${search}`,
+        `${import.meta.env.VITE_API_URL}/medicines-count?&search=${search}&sort=${sort}`,
         { withCredentials: true }
       );
       setCount(data.count);
@@ -54,7 +57,7 @@ const ShopPage = () => {
     };
 
     getCount();
-  }, [axiosCommon, search]);
+  }, [axiosCommon, search, sort]);
 
   const pages = [...Array(numberOfPages).keys()].map((element) => element + 1);
 
@@ -70,28 +73,30 @@ const ShopPage = () => {
     setSearch(searchText);
   };
 
-  // const handleReset=()=>{
-  //     setSearch('');
-  //     setSearchText('')
-  //     setFilter('')
-  // }
+  const handleReset=()=>{
+      setSearch('');
+      setSearchText('');
+      setSort('');
+      
+  }
   return (
     <div className="container mx-auto">
       <Helmet>
         <title>Shop Page | MediStore</title>
       </Helmet>
-      <div className="my-5 flex items-center">
-        <h2 className="text-2xl font-outfit font-bold">All Medicines</h2>
+      <div className="flex flex-col md:flex-row md:justify-between items-center">
+      <div className="my-5 flex flex-col md:flex-row items-center">
+        <h2 className="md:text-2xl font-outfit font-bold">All Medicines</h2>
         <form onSubmit={handleSearch}>
 
-            <div className="relative border w-52 border-blue-400 ml-4 rounded">
+            <div className="relative border w:40 md:w-52 border-blue-400 ml-4 rounded">
            
               <input
                 type="text"
                 name="search"
                 onChange={(e) => setSearchText(e.target.value)}
                 value={searchText}
-                className="h-14 w-full pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none"
+                className="h-12 w-full pr-8 pl-5 rounded z-0 focus:shadow focus:outline-none"
                 placeholder="Search anything..."
               />
                
@@ -102,6 +107,26 @@ const ShopPage = () => {
 
         
         </form>
+      </div>
+
+      {/* sort by price */}
+      <div className="space-y-2 flex flex-col-reverse md:flex-row items-center"> 
+      <button onClick={handleReset} className='btn bg-blue-400 text-white hover:text-blue-400 hover:bg-white hover:border border-blue-400 mr-3 my-2 md:my-0'>Reset</button>
+              <select
+                onChange={(e)=>{
+                    setSort(e.target.value);
+                    setCurrentPage(1);
+                }}
+                value={sort}
+                name='sort'
+                id='sort'
+                className='border p-3 border-blue-400 rounded-md focus:outline-blue-500'
+              >
+                <option value=''>Sort By Price</option>
+                <option value='dsc'>Descending Order</option>
+                <option value='asc'>Ascending Order</option>
+              </select>
+            </div>
       </div>
       <div className="overflow-x-auto container mx-auto">
         <table className="table border">

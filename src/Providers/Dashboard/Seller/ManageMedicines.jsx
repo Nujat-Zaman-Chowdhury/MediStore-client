@@ -36,7 +36,7 @@ const ManageMedicines = () => {
                 <title>Manage Medicines | Dashboard</title>
         </Helmet>
       <div className="flex justify-between items-center my-5">
-        <h2 className="text-2xl font-outfit font-bold">Manage Medicine Page</h2>
+        <h2 className="text-lg md:text-2xl font-outfit font-bold">Manage Medicine Page</h2>
         <button
           onClick={() => setIsOpen(true)}
           className="btn bg-blue-500 text-white hover:text-blue-400 hover:bg-white hover:border-blue-400 font-poppins"
@@ -48,12 +48,13 @@ const ManageMedicines = () => {
           isOpen={isOpen}
           closeModal={closeModal}
           setIsOpen={setIsOpen}
+          refetch={refetch}
         />
       </div>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table ">
           {/* head */}
-          <thead>
+          <thead className="bg-blue-400 text-white font-outfit">
             <tr>
               <th>Name</th>
               <th>Generic Name</th>

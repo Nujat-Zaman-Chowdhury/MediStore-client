@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AddCategoryForm = ({ setIsOpen,closeModal }) => {
+const AddCategoryForm = ({ setIsOpen,closeModal,refetch }) => {
   const axiosSecure = useAxiosSecure()
   const {
     register,
@@ -22,6 +22,7 @@ const AddCategoryForm = ({ setIsOpen,closeModal }) => {
       console.log("category data posted");
       closeModal()
       toast.success("Added successfully")
+      refetch();
     }
   })
 

@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AdvertisementForm = () => {
+const AdvertisementForm = ({refetch,isOpen,setIsOpen}) => {
   const {user} = useAuth()
   const axiosSecure = useAxiosSecure()
 
@@ -36,7 +36,9 @@ const AdvertisementForm = () => {
       const res = await axiosSecure.post('/advertisement',advertisementData)
       console.log(res.data.insertedId);
       if(res.data.insertedId){
+        setIsOpen(false)
         toast.success("Advertisement Request Send to Admin")
+        refetch();
         
       }
 

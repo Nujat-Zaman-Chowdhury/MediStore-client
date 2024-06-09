@@ -9,7 +9,7 @@ import {
 import AddCategoryForm from '../Form/AddCategoryForm';
 import AddMedicineForm from '../Form/AddMedicineForm';
 
-const AddMedicineModal = ({isOpen,closeModal,setIsOpen}) => {
+const AddMedicineModal = ({isOpen,closeModal,setIsOpen,refetch}) => {
     return (
         <Transition appear show={isOpen} as={Fragment}>
         <Dialog
@@ -47,10 +47,10 @@ const AddMedicineModal = ({isOpen,closeModal,setIsOpen}) => {
                   >
                     Add Medicine
                   </DialogTitle>
-                  <div className='mt-2 w-full'>{/* Update room form */}</div>
+                  
                   <hr className='mt-8' />
-                  <div className='mt-2 w-full'>{/* Update room form */}
-                    <AddMedicineForm setIsOpen={setIsOpen} closeModal={closeModal}/>
+                  <div className='mt-2 w-full'>
+                    <AddMedicineForm setIsOpen={setIsOpen} closeModal={closeModal} refetch={refetch}/>
                 </div>
                  
                 </DialogPanel>

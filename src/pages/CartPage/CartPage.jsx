@@ -125,24 +125,24 @@ const CartPage = () => {
             </div>
           </div>
           <div className="overflow-x-auto">
-            <table className="table">
+            <table className="table border">
               {/* head */}
-              <thead>
+              <thead className="bg-blue-400 text-white font-outfit">
                 <tr>
-                  <th>Name</th>
-                  <th>Company Name</th>
-                  <th>Price Per Unit</th>
-                  <th>Quantity</th>
-                  <th>Actions</th> {/* New column for actions */}
+                  <th className="text-center">Name</th>
+                  <th className="text-center">Company Name</th>
+                  <th className="text-center">Price Per Unit</th>
+                  <th className="text-center">Quantity</th>
+                  <th className="text-center">Actions</th> {/* New column for actions */}
                 </tr>
               </thead>
               <tbody>
                 {cart.map((medicine) => (
-                  <tr key={medicine?._id}>
-                    <td>{medicine?.name}</td>
-                    <td>{medicine?.company}</td>
-                    <td>{medicine?.pricePerUnit}</td>
-                    <td>
+                  <tr className="font-poppins" key={medicine?._id}>
+                    <td className="text-center">{medicine?.name}</td>
+                    <td className="text-center">{medicine?.company}</td>
+                    <td className="text-center">{medicine?.pricePerUnit}</td>
+                    <td className="text-center">
                       <button
                       disabled={medicine.quantity===1}
                        onClick={()=>handleDecrease(medicine._id)}
@@ -158,7 +158,7 @@ const CartPage = () => {
                         +
                       </button>
                     </td>
-                    <td>
+                    <td className="text-center">
                       <button
                         onClick={() => handleRemove(medicine._id)}
                         className="btn bg-red-500 text-white   font-poppins"

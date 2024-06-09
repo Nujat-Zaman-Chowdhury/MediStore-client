@@ -12,13 +12,14 @@ const ManageCategoryRow = ({category,handleDelete,refetch}) => {
     <>
       {/* row 1 */}
       <tr>
-        <td>{category.category}</td>
+        <td>{category?.category}</td>
         <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle w-12 h-12">
+          <div className="">
+            <div className="">
+              <div className="w-16 h-16">
                 <img
-                  src={category.image}
+                  src={category?.image}
+                  className="w-full h-full object-cover object-center"
                   alt="Avatar Tailwind CSS Component"
                 />
               </div>
@@ -28,14 +29,14 @@ const ManageCategoryRow = ({category,handleDelete,refetch}) => {
           {/*action */}
         <td>
 
-          <button onClick={()=>{handleDelete(category._id)}} className="btn  text-red-600 text-xl">
+          <button onClick={()=>{handleDelete(category?._id)}} className="btn bg-white text-red-500 text-xl">
             <MdDelete />
           </button>
           
         </td>
         <td>
 
-        <button onClick={()=>{setIsEditModalOpen(true)}}  className="btn  text-red-600 text-xl">
+        <button onClick={()=>{setIsEditModalOpen(true)}}  className="btn bg-white  text-blue-500 text-xl">
             <MdOutlineSystemUpdateAlt />
           </button>
           <UpdateCategoryModal category={category} isOpen={isEditModalOpen} setIsEditModalOpen={setIsEditModalOpen} refetch={refetch}></UpdateCategoryModal>

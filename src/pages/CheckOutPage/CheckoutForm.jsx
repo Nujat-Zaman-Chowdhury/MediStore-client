@@ -20,10 +20,16 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const [cart, refetch] = useCart();
-  const totalPrice = cart.reduce(
-    (total, item) => total + item.pricePerUnit * item.quantity,
-    0
-  );
+  // const totalPrice = cart.reduce(
+  //   (total, item) => total + item.pricePerUnit * item.quantity,
+  //   0
+  // );
+  // console.log(totalPrice);
+  const totalPrice = cart.reduce((total, item) => {
+    const discount = (item.pricePerUnit * item.discountPercentage) / 100;
+    const discountedPrice = item.pricePerUnit - discount;
+    return total + discountedPrice * item.quantity;
+  }, 0);
   console.log(totalPrice);
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosSecure } from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-const AddMedicineForm = ({closeModal}) => {
+const AddMedicineForm = ({closeModal,refetch}) => {
   const { user } = useAuth();
 
   // const navigate = useNavigate()
@@ -27,6 +27,7 @@ const AddMedicineForm = ({closeModal}) => {
       // console.log("medicine data posted");
       closeModal()
       toast.success("Medicine added successfully")
+      refetch();
     }
   })
 
@@ -44,8 +45,11 @@ const AddMedicineForm = ({closeModal}) => {
 
       const medicineData = {
         ...data,
+        pricePerUnit: parseFloat(data.pricePerUnit), 
+        discountPercentage: parseFloat(data.discountPercentage),
         image: image_url,
         seller,
+
       };
       // console.log(medicineData);
 
@@ -88,7 +92,7 @@ const AddMedicineForm = ({closeModal}) => {
                   name="generic-name"
                   id="generic-name"
                   type="text"
-                  placeholder="Item name"
+                  placeholder="Generic name"
                   required
                 />
               </div>
@@ -144,7 +148,6 @@ const AddMedicineForm = ({closeModal}) => {
                 <option value="Syrup">Syrup</option>
                 <option value="Injection">Injection</option>
                 <option value="Cream">Cream</option>
-                <option value="Powder">Powder</option>
                 <option value="Ointment">Ointment</option>
                 <option value="Gel">Gel</option>
                 <option value="Vitamins">Vitamins</option>
@@ -170,7 +173,6 @@ const AddMedicineForm = ({closeModal}) => {
                 <option value="WellnessPharm">WellnessPharm</option>
                 <option value="DiabeCare">DiabeCare</option>
                 <option value="Medicare">Medicare</option>
-                <option value="SkinCare Ltd">SkinCare Ltd.</option>
                 <option value="NaturalCare">NaturalCare</option>
                 <option value="NutriLife">NutriLife</option>
               </select>
@@ -236,6 +238,9 @@ const AddMedicineForm = ({closeModal}) => {
           Save & Continue
         </button>
       </form>
+      <div className="mt-3">
+        <button onClick={closeModal} className="w-full p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-red-500">Close</button>
+      </div>
     </div>
   );
 };

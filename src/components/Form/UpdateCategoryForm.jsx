@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+
 import { imageUpload } from "../../utils";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -9,51 +9,69 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
     const axiosSecure = useAxiosSecure();
     const [loading,setLoading]= useState(false)
     const [categoryData,setCategoryData] = useState(category)
-    const {
-        register,
-        watch,
-        handleSubmit,
-        formState: { errors },
-      } = useForm();
+    // const {
+    //     register,
+    //     watch,
+    //     handleSubmit,
+    //     formState: { errors },
+    //   } = useForm();
 
 
 
-    const onSubmit = async (data) => {
-        console.log(categoryData)
-        setLoading(true)
-        // const image_url = await imageUpload(data.image[0]);
-        const updatedCategoryData = Object.assign({},categoryData)
-        console.log(updatedCategoryData);
-        delete updatedCategoryData._id
-        try {
+    // const onSubmit = async (data) => {
+    //     console.log(categoryData)
+    //     setLoading(true)
+    //     // const image_url = await imageUpload(data.image[0]);
+    //     const updatedCategoryData = Object.assign({},categoryData)
+    //     console.log(updatedCategoryData);
+    //     delete updatedCategoryData._id
+    //     try {
+
+    //       //save category to db
+    //       const {data} = await axiosSecure.put(`/category/update/${category?._id}`,updatedCategoryData)
+    //       // console.log(data);
+    //       refetch();
+    //       setLoading(false)
+    //       setIsEditModalOpen(false)
+    //       toast.success("Updated Successfully")
           
-          
+
     
-          //save category to db
+    //     } catch (err) {
+    //       console.log(err);
+    //       toast.error(err.message)
+    //     }
+    //   };
+
+    const handleSubmit =  async(e)=>{
+      setLoading(true)
+      e.preventDefault()
+      const updatedCategoryData = Object.assign({},categoryData)
+      delete updatedCategoryData._id
+      try{
           const {data} = await axiosSecure.put(`/category/update/${category?._id}`,updatedCategoryData)
           // console.log(data);
-          refetch();
+          refetch()
           setLoading(false)
-          setIsEditModalOpen(false)
           toast.success("Updated Successfully")
-
-    
-        } catch (err) {
+      }
+      catch(err){
           console.log(err);
           toast.error(err.message)
-        }
-      };
+      }
+  }
+
 
       
-      const handleImage =async image =>{
-        console.log(image);
+      const handleImage = async (image) =>{
         setLoading(true)
+        // console.log(image);
         try{
             const image_url = await imageUpload(image)
             console.log(image_url);
             setCategoryData({...categoryData, image:image_url})
             setLoading(false)
-            
+            // setIsEditModalOpen(false)
         }
         catch(err){
             console.log(err);
@@ -65,13 +83,17 @@ console.log(categoryData);
     return (
         <div className="w-full flex flex-col justify-center  text-gray-800 rounded-xl bg-white">
       <div className="mt-2 ">
-        <form className="space-y-3 my-3 w-full" onSubmit={handleSubmit(onSubmit)}>
+        <form className="space-y-3 my-3 w-full" 
+        // onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
+        
+        >
         <div className="space-y-1 text-sm w-1/2 mx-auto">
               <label htmlFor="category" className="block text-gray-600">
                 Category 
               </label>
               <select
-                {...register("category")}
+                // {...register("category")}
                 value={categoryData?.category}
                 onChange={(e)=>{setCategoryData({...categoryData,category:e.target.value})}}
                 required
@@ -86,7 +108,6 @@ console.log(categoryData);
                 <option value="Syrup">Syrup</option>
                 <option value="Injection">Injection</option>
                 <option value="Cream">Cream</option>
-                <option value="Powder">Powder</option>
                 <option value="Ointment">Ointment</option>
                 <option value="Gel">Gel</option>
                 <option value="Vitamins">Vitamins</option>
@@ -95,7 +116,7 @@ console.log(categoryData);
             <div className="flex flex-col w-1/2 mx-auto text-center py-4">
                   <label>
                     <input
-                      {...register("image")}
+                      // {...register("image")}
                       onChange={(e)=>{handleImage(e.target.files[0])}}
                       className="text-sm cursor-pointer w-36 hidden"
                       type="file"

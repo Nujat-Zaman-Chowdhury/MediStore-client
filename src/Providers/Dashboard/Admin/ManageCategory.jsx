@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
 
 const ManageCategory = () => {
   const axiosSecure = useAxiosSecure();
@@ -31,8 +32,8 @@ const ManageCategory = () => {
     },
     onSuccess:(data)=>{
         // console.log(data);
-        refetch(); 
         toast.success('Successfully deleted')
+        refetch(); 
     }
   })
   const handleDelete = async(id) => {
@@ -46,16 +47,17 @@ const ManageCategory = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div>
       <Helmet>
         <title>Manage Category | Dashboard</title>
       </Helmet>
-      <div className="flex justify-between items-center my-5">
-        <h2 className="text-2xl font-outfit font-bold">
-          Manage Category Page {categories.length}
+      <div className="flex justify-around md:justify-between items-center my-5">
+        <h2 className="md:text-2xl font-outfit font-bold">
+          Manage Category Page 
         </h2>
+        <p className="md:text-2xl font-outfit">Total Category: <span className="text-blue-400">{categories.length}</span></p>
         <button
           onClick={() => setIsOpen(true)}
           className="btn bg-blue-500 text-white hover:text-blue-400 hover:bg-white hover:border-blue-400 font-poppins"
@@ -64,6 +66,7 @@ const ManageCategory = () => {
         </button>
         {/* add category modal */}
         <AddCategoryModal
+        refetch={refetch}
           isOpen={isOpen}
           closeModal={closeModal}
           setIsOpen={setIsOpen}
@@ -72,7 +75,7 @@ const ManageCategory = () => {
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className="bg-blue-400 text-white font-poppins uppercase">
             <tr>
               <th>Category Name</th>
               <th>Image</th>

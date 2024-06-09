@@ -24,11 +24,11 @@ const PaymentManagement = () => {
                 <title>Payment Management | Dashboard</title>
       </Helmet>
       <div>
-        <h1>Total Payments : {allPayments.length}</h1>
+        <h1 className="md:text-3xl font-bold font-outfit my-3">Total Payments : <span className="text-blue-400">{allPayments.length}</span></h1>
       </div>
-      <table className="table">
+      <table className="table mt-5 border">
         {/* head */}
-        <thead>
+        <thead className="bg-blue-400 text-white uppercase font-outfit">
           <tr>
             <th>Payment ID</th>
             <th>User Email</th>

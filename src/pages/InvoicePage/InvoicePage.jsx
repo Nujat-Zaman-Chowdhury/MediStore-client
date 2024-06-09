@@ -44,7 +44,7 @@ const InvoicePage = () => {
     </div>
     <div className="border-b-2 border-gray-300 pb-8 mb-8">
         <h2 className="text-2xl font-bold mb-4">Bill To: {payment.buyer?.name || 'anonymous'}</h2>
-        <div className="text-gray-700 mb-2">Name: {payment?.buyer?.email}</div>
+        <div className="text-gray-700 mb-2">Email: {payment?.buyer?.email}</div>
         <div className="text-gray-700 mb-2">{new Date(payment?.date).toLocaleDateString()}</div>
         <div className="text-gray-700 mb-2">123 Main St.</div>
         <div className="text-gray-700 mb-2">Anytown, Bangladesh 12345</div>
