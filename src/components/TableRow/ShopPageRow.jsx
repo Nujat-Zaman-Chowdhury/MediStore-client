@@ -70,7 +70,7 @@ const ShopPageRow = ({medicine,setIsOpen,setSelectedMedicine,selectedMedicine}) 
     return (
         <>
           {/* row 1 */}
-        <tr className="bg-white">
+        <tr className="bg-white font-poppins">
         <td>{medicine?.name}</td>
         <td>{medicine?.category}</td>
         <td>{medicine?.company}</td>

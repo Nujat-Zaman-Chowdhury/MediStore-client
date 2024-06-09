@@ -2,13 +2,20 @@ import { Helmet } from "react-helmet-async";
 import ShopPageRow from "../../components/TableRow/ShopPageRow";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EyeButtonModal from "../../components/Modal/EyeButtonModal";
 
 const ShopPage = () => {
   const axiosCommon = useAxiosCommon();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedMedicine,setSelectedMedicine] = useState(null)
+
+  //pagination
+  const [count,setCount]=useState(0)
+    const [itemsPerPage,setItemsPerPage]=useState(5);
+    const [currentPage,setCurrentPage]=useState(1);
+    const numberOfPages = Math.ceil(count/itemsPerPage);
+
   const closeModal = () => {
     setIsOpen(false);
     setSelectedMedicine(null)
@@ -19,19 +26,50 @@ const ShopPage = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["medicines"],
+    queryKey: ["medicines",currentPage,itemsPerPage],
     queryFn: async () => {
-      const { data } = await axiosCommon("/medicines");
+      const { data } = await axiosCommon(`/medicines?page=${currentPage}&size=${itemsPerPage}`);
       return data;
     },
   });
 
+
+
+      //pagination
+      // get count
+      useEffect(()=>{
+        const getCount = async()=>{
+            const {data} = await axiosCommon(`${import.meta.env.VITE_API_URL}/medicines-count?`,{withCredentials:true})
+            setCount(data.count)
+            // setLoading(false)
+        }
+
+        getCount();
+    },[axiosCommon])
+
+
+
+  const pages = [...Array(numberOfPages).keys()].map(element=>element+1)
+
+    const handlePaginationButton = (value)=>{
+        // console.log(value);
+        setCurrentPage(value);
+        window.scrollTo(0, 0);
+    }
+
+
+
+    // const handleReset=()=>{
+    //     setSearch('');
+    //     setSearchText('')
+    //     setFilter('')
+    // }
   return (
-    <div>
+    <div className="container mx-auto">
       <Helmet>
         <title>Shop Page | MediStore</title>
       </Helmet>
-      <div className="flex justify-center items-center my-5">
+      <div className="my-5">
         <h2 className="text-2xl font-outfit font-bold">All Medicines</h2>
       </div>
       <div className="overflow-x-auto container mx-auto">
@@ -64,6 +102,32 @@ const ShopPage = () => {
       </div>
       {/*Modal of eye btn */}
       <EyeButtonModal isOpen={isOpen} closeModal={closeModal} medicine={selectedMedicine}></EyeButtonModal>
+
+      {/* pagination */}
+      <div className="my-12 flex justify-center items-center">
+            
+            {/* prev button */}
+            <button
+            disabled={currentPage === 1}
+            onClick={()=>handlePaginationButton(currentPage-1)}
+            className="px-4 border border-blue-500 py-2 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-white rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-blue-500  hover:text-white">Prev</button>
+
+            {
+                pages.map(pageNum=>(
+                    <button
+                    onClick={()=>handlePaginationButton(pageNum)}
+                    className={`hidden ${currentPage === pageNum? 'bg-blue-500 text-white': ''} px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-blue-500  hover:text-white`} 
+                    key={{pageNum}}>{pageNum}</button>
+                ))
+            }
+
+            {/* next button */}
+            <button
+            disabled={currentPage === numberOfPages}
+            onClick={()=>handlePaginationButton(currentPage+1)}
+            className="px-4 py-2 border border-blue-500 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-white rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-blue-500  hover:text-white">next</button>
+            </div>
+
     </div>
   );
 };
