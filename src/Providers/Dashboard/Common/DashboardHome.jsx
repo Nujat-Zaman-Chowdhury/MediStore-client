@@ -1,14 +1,19 @@
-import { Helmet } from "react-helmet-async";
+
+import useRole from "../../../hooks/useRole";
+import LoadingSpinner from "../../../Shared/LoadingSpinner";
+import AdminHomePage from "../Admin/AdminHomePage";
+import SellerHomePage from "../Seller/SellerHomePage";
 
 
 const DashboardHome = () => {
+    const [role, isLoading] = useRole();
+    if(isLoading)  return <LoadingSpinner/>
     return (
-        <div>
-            <Helmet>
-                <title>Home | Dashboard</title>
-            </Helmet>
+        <>
+            {role === 'Admin' && <AdminHomePage/>}
+            {role === 'Seller' && <SellerHomePage/>}
             
-        </div>
+        </>
     );
 };
 

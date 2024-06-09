@@ -32,7 +32,7 @@ const PaymentManagementRow = ({payment,refetch}) => {
               <td>{payment?.email}</td>
               <td>{payment?.price}</td>
               <td
-              className={`${payment?.status} === 'pending'? text-red-400 : 'text-blue-400'`}
+              className={payment?.status === 'pending' ? 'text-red-400' : 'text-blue-400'}
               >{payment?.status}</td>
               <td>
                 {payment?.status === 'pending' && (
