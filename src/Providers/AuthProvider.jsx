@@ -66,22 +66,25 @@ const AuthProvider = ({ children }) => {
       // console.log('current User:',currentUser);
 
       //jwt token
-      const userInfo ={
-        email:currentUser?.email,
-      }
+      
       console.log(userInfo);
       if(currentUser){
+        const userInfo ={
+          email:currentUser.email,
+        }
         //get token
         axiosCommon.post('/jwt',userInfo)
         .then(res=>{
           if(res.data.token){
-            localStorage.setItem('token',res.data.token)
+            localStorage.setItem('access-token',res.data.token)
+            
           }
         })
       }
       else{
         //remove access token if user is null
-        localStorage.removeItem('token')
+        localStorage.removeItem('access-token')
+        setLoading(false)
 
       }
     })
