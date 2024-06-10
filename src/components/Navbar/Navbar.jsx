@@ -3,6 +3,8 @@ import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../hooks/useCart";
+import DigitalClock from "../DigitalClock";
+
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -59,22 +61,32 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-30 p-2 shadow bg-base-100 rounded-box w-52"
           >
             {navLinks}
+            
           </ul>
         </div>
-        <div className="flex items-center">
-          <img src="/logo.png" alt="" className="w-10 h-10 mr-2 object-cover" />
+        <div className="flex flex-col md:flex-row items-center gap-1">
+          <div className="flex items-center">
+          <img src="/logo.png" alt="" className="w-6 h-6 md:w-10 md:h-10 mr-2 object-cover" />
           <Link to="/" className="text-xl font-bold text-blue-400 font-outfit">
             MediStore
           </Link>
+          </div>
+          <DigitalClock/>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
+      <select className="select border border-blue-400 w-[23%] mr-1 hidden md:flex">
+      
+      <option disabled selected>Languages</option>
+      <option>English</option>
+      <option>Bangla</option>
+    </select>
         <Link to="/cart-page" tabIndex={0} role="button" className="btn btn-ghost btn-circle flex items-center justify-center text-lg mr-4">
          
           <FaShoppingCart /><span>{cart.length}</span>

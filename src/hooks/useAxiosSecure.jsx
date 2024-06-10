@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const axiosSecure = axios.create({
     baseURL:import.meta.env.VITE_API_URL,
     
+    
 })
 const useAxiosSecure = () => {
     const {logOut} = useAuth();
@@ -13,7 +14,7 @@ const useAxiosSecure = () => {
     axiosSecure.interceptors.request.use(function(config){
       const token = localStorage.getItem('access-token')
       console.log(token);
-      // console.log(config);
+
       config.headers.authorization =`Bearer ${token}`
       console.log(config.headers.authorization);
       return config;

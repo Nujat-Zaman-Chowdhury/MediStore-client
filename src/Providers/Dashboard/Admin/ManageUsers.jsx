@@ -1,33 +1,36 @@
 import { Helmet } from "react-helmet-async";
 import UserDataRow from "../../../components/TableRow/UserDataRow";
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import LoadingSpinner from "../../../Shared/LoadingSpinner";
 import { FaUser } from "react-icons/fa6";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
-  
 
-  //fetch users
-  const {
-    data: users = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: async () => {
-      const { data } = await axiosSecure("/users");
-      console.log(data);
-      return data;
-    },
-  });
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axiosSecure("/users",{
+          headers:{
+            authorization: `Bearer ${localStorage.getItem('access-token')}`
+          }
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  
-
-  if (isLoading) return <LoadingSpinner></LoadingSpinner>;
+    fetchUsers();
+  }, [axiosSecure]);
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <Helmet>
@@ -58,7 +61,7 @@ const ManageUsers = () => {
                       key={user._id}
                       user={user}
                       index={index}
-                      refetch={refetch}
+                      // refetch={refetch}
                       
                     />
                   ))}

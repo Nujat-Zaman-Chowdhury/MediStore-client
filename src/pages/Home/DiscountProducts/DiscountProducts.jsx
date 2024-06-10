@@ -44,17 +44,39 @@ const DiscountProducts = () => {
         }}
         modules={[Pagination]}
         className="mySwiper py-10"
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          // when window width is >= 768px
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          // when window width is >= 1024px
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+        }}
       >
         {discountProducts.map((product) => (
           <SwiperSlide className="" key={product.key}>
-            <div className="w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl my-10 mx-auto">
+            
+            <div className="w-full md:w-80 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl my-10 mx-auto">
               <div className="flex flex-col mx-auto p-3 relative shadow">
                 <img
                   src={product?.image}
                   alt="Product"
-                  className="h-72 w-72 object-cover rounded  mx-auto shadow"
+                  className="h-full md:h-72  md:w-72 object-cover rounded  mx-auto shadow"
                 />
-                <div className="w-12 h-12 rounded-full text-white font-poppins font-semibold bg-blue-400 flex justify-center items-center absolute left-5 top-5">
+                <div className="md:w-12 md:h-12 rounded-full text-white font-poppins font-semibold bg-blue-400 flex justify-center items-center absolute left-5 top-5">
                 <p>{product?.discountPercentage}%</p>
                 </div>
                 <div className="px-4 py-3 w-72">
@@ -90,6 +112,7 @@ const DiscountProducts = () => {
                 </div>
               </div>
             </div>
+
           </SwiperSlide>
         ))}
       </Swiper>

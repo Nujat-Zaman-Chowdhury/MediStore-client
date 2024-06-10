@@ -3,7 +3,7 @@ import SalesReportRow from "../../../components/TableRow/SalesReportRow";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Shared/LoadingSpinner";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
@@ -14,13 +14,14 @@ const SalesReport = () => {
   const [endDate, setEndDate] = useState(new Date());
   const tableRef = useRef(null);
   const axiosSecure = useAxiosSecure();
-  const { data: sales = [], isLoading } = useQuery({
-    queryKey: ["sales"],
+  const { data: sales = [], isLoading,refetch } = useQuery({
+    queryKey: ["sales",startDate,endDate],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/payments`);
+      const { data } = await axiosSecure.get('/payments');
       return data;
     },
   });
+
 
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
@@ -37,12 +38,12 @@ const SalesReport = () => {
             Total : <span className="text-blue-400 mb-3">{sales.length}</span>
           </p>
         </div>
-        {/* <div className="my-4 md:my-0 flex justify-center w-1/3 mx-auto">
-      <span className="mx-2">from</span>
+        <div className="my-4 md:my-0 flex justify-center   border border-blue-400 p-2 rounded">
+      <span className="mx-2 text-red-500">from</span>
       <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-      <span className="mx-2">to</span>
+      <span className="mx-2 text-red-500">to</span>
       <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-      </div> */}
+      </div>
 
         <DownloadTableExcel
           filename="sales-report table"
