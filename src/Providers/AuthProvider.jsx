@@ -73,7 +73,7 @@ const AuthProvider = ({ children }) => {
           }
         });
       } else {
-        //remove access token if user is null
+
         localStorage.removeItem("access-token");
         setLoading(false);
       }

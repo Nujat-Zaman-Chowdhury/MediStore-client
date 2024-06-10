@@ -20,94 +20,96 @@ import ShopPage from "../pages/ShopPage/ShopPage";
 import CartPage from "../pages/CartPage/CartPage";
 import InvoicePage from "../pages/InvoicePage/InvoicePage";
 import CheckOut from "../pages/CheckOutPage/CheckOut";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import SellerRoute from "./SellerRoute";
 
 export const router = createBrowserRouter([
-    {
-        path:'/',
-        errorElement:<ErrorPage></ErrorPage>,
-        element:<Main></Main>,
-        children:[
-            {
-            path:'/',
-            element:<Home></Home>,
-            
-        },
-        {
-            path:'/category-details/:category',
-            element:<CategoryCardDetails></CategoryCardDetails>
-        },
-        {
-            path:'/shop-page',
-            element:<ShopPage></ShopPage>
-        },
-        {
-            path:'/cart-page',
-            element:<CartPage></CartPage>
-        },
-        {
-            path:'/checkout',
-            element:<CheckOut></CheckOut>
-        }
-    ]
-    },
-    {path:'/login', element:<Login/>},
-    {path:'/sign-up', element:<SignUp/>},
-    
-    {path:'/invoice-page/:transactionId',element:<InvoicePage></InvoicePage>},
+  {
+    path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
+    element: <Main></Main>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/category-details/:category",
+        element: <CategoryCardDetails></CategoryCardDetails>,
+      },
+      {
+        path: "/shop-page",
+        element: <ShopPage></ShopPage>,
+      },
+      {
+        path: "/cart-page",
+        element: <PrivateRoute><CartPage></CartPage></PrivateRoute>,
+      },
+      {
+        path: "/checkout",
+        element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+      },
+    ],
+  },
+  { path: "/login", element: <Login /> },
+  { path: "/sign-up", element: <SignUp /> },
 
-    {
-        path:'/dashboard',
-        element:<DashboardLayout></DashboardLayout>,
-        children:[
-            //admin routes
-            {
-            index:true,
-            element:<DashboardHome></DashboardHome>
-            },
-            {
-            path:"manage-users",
-            element:<ManageUsers></ManageUsers>
-            },
-            {
-            path:"manage-category",
-            element:<ManageCategory></ManageCategory>
-            },
-            {
-            path:"payment-management",
-            element:<PaymentManagement></PaymentManagement>
-            },
-            {
-            path:"sales-report",
-            element:<SalesReport></SalesReport>
-            },
-    
-            {
-            path:"manage-banner",
-            element:<ManageBannerAdvertise></ManageBannerAdvertise>
-            },
+  {
+    path: "/invoice-page/:transactionId",
+    element: <PrivateRoute><InvoicePage></InvoicePage></PrivateRoute>,
+  },
 
+  {
+    path: "/dashboard",
+    element:<PrivateRoute> <DashboardLayout></DashboardLayout></PrivateRoute>,
+    children: [
+      //admin routes
+      {
+        index: true,
+        element: <PrivateRoute><DashboardHome></DashboardHome></PrivateRoute>,
+      },
+      {
+        path: "manage-users",
+        element: <PrivateRoute><AdminRoute><ManageUsers></ManageUsers></AdminRoute></PrivateRoute>,
+      },
+      {
+        path: "manage-category",
+        element: <PrivateRoute><AdminRoute><ManageCategory></ManageCategory></AdminRoute></PrivateRoute>,
+      },
+      {
+        path: "payment-management",
+        element: <PrivateRoute><AdminRoute><PaymentManagement></PaymentManagement></AdminRoute></PrivateRoute>,
+      },
+      {
+        path: "sales-report",
+        element: <PrivateRoute><AdminRoute><SalesReport></SalesReport></AdminRoute></PrivateRoute>,
+      },
 
-            //seller related routes
-            {
-                path:"manage-medicines",
-                element:<ManageMedicines></ManageMedicines>
-            },
-            {
-                path:"payment-history",
-                element:<PaymentHistory></PaymentHistory>
-            },
-            {
-                path:"ask-for-advertisement",
-                element:<AskForAdvertisement></AskForAdvertisement>
-            },
+      {
+        path: "manage-banner",
+        element:<PrivateRoute><AdminRoute> <ManageBannerAdvertise></ManageBannerAdvertise></AdminRoute></PrivateRoute>,
+      },
 
-            //user related routes
-            {
-                path:"user-payment-history",
-                element:<UserPaymentHistory></UserPaymentHistory>
-            },
+      //seller related routes
+      {
+        path: "manage-medicines",
+        element: <PrivateRoute><SellerRoute><ManageMedicines></ManageMedicines></SellerRoute></PrivateRoute>,
+      },
+      {
+        path: "payment-history",
+        element:<PrivateRoute><SellerRoute> <PaymentHistory></PaymentHistory></SellerRoute></PrivateRoute>,
+      },
+      {
+        path: "ask-for-advertisement",
+        element:<PrivateRoute><SellerRoute> <AskForAdvertisement></AskForAdvertisement></SellerRoute></PrivateRoute>,
+      },
 
-    ]
-        
-    }
-])
+      //user related routes
+      {
+        path: "user-payment-history",
+        element: <PrivateRoute><UserPaymentHistory></UserPaymentHistory></PrivateRoute>,
+      },
+    ],
+  },
+]);

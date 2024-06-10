@@ -11,8 +11,9 @@ import useCart from "../../hooks/useCart";
 const ShopPageRow = ({medicine,setIsOpen,setSelectedMedicine,selectedMedicine}) => {
   const {user} = useAuth();
   const axiosSecure = useAxiosSecure()
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate()
+  const from = location.state || '/'
   const [,refetch] = useCart();
 
   //handle eye 
@@ -60,7 +61,7 @@ const ShopPageRow = ({medicine,setIsOpen,setSelectedMedicine,selectedMedicine}) 
       }).then((result) => {
         if (result.isConfirmed) {
           //send user to login page
-          navigate('/login',{state: {from: location}})
+          navigate('/login', { state: { from: location } });
         }
       });
     }

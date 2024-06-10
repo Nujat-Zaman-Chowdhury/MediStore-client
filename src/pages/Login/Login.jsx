@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { ImSpinner10 } from "react-icons/im";
@@ -10,9 +10,10 @@ import useAxiosCommon from "../../hooks/useAxiosCommon";
 
 const Login = () => {
     const axiosCommon = useAxiosCommon()
-    
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
+  const navigate = useNavigate()
     const {signIn,signInWithGoogle,loading,setLoading} = useAuth()
-    const navigate = useNavigate()
     const {
       register,
       handleSubmit,
@@ -27,7 +28,7 @@ const Login = () => {
 
          //signin
          await signIn(data.email,data.password)
-         navigate('/')
+         navigate(from);
          toast.success('Login Successful')
       }
       catch(err){
@@ -52,7 +53,7 @@ const Login = () => {
               
             }
             axiosCommon.put(`/user`,currentUser)
-            navigate('/')
+            navigate(from);
             toast.success('Login Successful')
         }
         catch(err){
