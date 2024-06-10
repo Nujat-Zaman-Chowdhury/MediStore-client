@@ -66,7 +66,9 @@ const Sidebar = () => {
             <nav>
               {/* dashboard home */}
               
-              <MenuItem label="Home" address="/dashboard" icon={FaHome}></MenuItem>
+              {
+                role === 'User'? <UserMenu></UserMenu> : <MenuItem label="Home" address="/dashboard" icon={FaHome}></MenuItem>
+              }
 
               {/* admin related   */}
               {role === 'Admin' && <AdminMenu></AdminMenu>}
@@ -75,7 +77,7 @@ const Sidebar = () => {
                {role === 'Seller' && <SellerMenu></SellerMenu>}
 
               {/* user related routes */}
-              {role === 'User' && <UserMenu></UserMenu>}
+              {/* {role === 'User' && <UserMenu></UserMenu>} */}
 
             </nav>
           </div>

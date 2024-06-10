@@ -63,7 +63,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
       if(isLoading) return <LoadingSpinner/>
     return (
-        <div>
+        <div className="">
             <Helmet>
                 <title>Home | Dashboard</title>
             </Helmet>
@@ -148,16 +148,16 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
         </div>
     </div>
 </div>
-<div className="flex">
-        <div className="w-1/2">
+<div className="">
+        <div className="w-full md:w-1/2">
           <BarChart
-            width={500}
+            width={300}
             height={300}
             data={chartData}
             margin={{
               top: 20,
               right: 30,
-              left: 20,
+              left: 10,
               bottom: 5,
             }}
           >
@@ -176,9 +176,9 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
             </Bar>
           </BarChart>
         </div>
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
         <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={400} height={400}>
+        <PieChart className="w-[200px] h-full md:w-[300px] md:h-[300px]">
           <Pie
             data={pieChartData}
             cx="50%"
@@ -193,13 +193,12 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Legend></Legend>
         </PieChart>
       </ResponsiveContainer>
         </div>
       </div>
     </div>
-        </div>
+    </div>
     );
 };
 

@@ -9,6 +9,7 @@ import { MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { Button } from "@headlessui/react";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
   const [cart, refetch, isLoading] = useCart();
@@ -67,6 +68,7 @@ const CartPage = () => {
     try {
       // console.log(id);
       await deleteMedicine(id);
+      toast.success('Removed')
       refetch();
     } catch (err) {
       console.log(err.message);
@@ -107,18 +109,18 @@ const CartPage = () => {
                 <span className="text-blue-400 ml-2">${totalPrice}</span>
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
               <Link to="/checkout">
                 <Button
                             
-                className="btn bg-blue-400 text-white hover:bg-white hover:text-blue-400 hover:border-blue-400">
+                className="btn flex bg-blue-400 text-white hover:bg-white hover:text-blue-400 hover:border-blue-400">
                   Checkout <MdOutlineShoppingCartCheckout />
                 </Button>
               </Link>
 
               <button
                 onClick={handleClearAll}
-                className="btn bg-red-600 text-white hover:bg-red-500 hover:text-white"
+                className="btn bg-red-600 text-white hover:bg-red-500 hover:text-white flex"
               >
                 Clear All <MdRemoveShoppingCart />
               </button>

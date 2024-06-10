@@ -34,6 +34,7 @@ const ManageCategory = () => {
         // console.log(data);
         toast.success('Successfully deleted')
         refetch(); 
+        
     }
   })
   const handleDelete = async(id) => {

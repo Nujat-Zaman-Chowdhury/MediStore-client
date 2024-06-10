@@ -10,19 +10,43 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SalesReport = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const tableRef = useRef(null);
   const axiosSecure = useAxiosSecure();
   const { data: sales = [], isLoading,refetch } = useQuery({
     queryKey: ["sales",startDate,endDate],
     queryFn: async () => {
-      const { data } = await axiosSecure.get('/payments');
+      const { data } = await axiosSecure.get('/payments',{
+        
+        params: {
+          startDate: startDate,
+          endDate: endDate,
+        },
+        }
+
+      
+      );
       return data;
     },
-  });
+    
 
+  },
+  
 
+);
+
+useEffect(() => {
+  if (startDate && endDate) {
+    refetch();
+  }
+}, [startDate, endDate, refetch]);
+
+  console.log(sales);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    refetch();
+};
   if (isLoading) return <LoadingSpinner></LoadingSpinner>;
   return (
     <div>
@@ -31,6 +55,29 @@ const SalesReport = () => {
       </Helmet>
       <div className="flex flex-col md:flex-row md:justify-between items-center">
         <div>
+        <form onSubmit={handleSearch} className="mb-4">
+        <div className="flex gap-4 ">
+         <div className="flex w-full items-center gap-4">
+         <label className="block mb-2 text-sm font-medium">From</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+          />
+         </div>
+          <div className="flex items-center w-full gap-4">
+          <label className="block mb-2 text-sm font-medium">To</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md"
+          />
+          </div>
+          <button type="submit">Search</button>
+        </div>
+      </form>
           <h2 className="text-lg md:text-3xl font-out font-bold my-2">
             Sales Report
           </h2>
@@ -38,12 +85,7 @@ const SalesReport = () => {
             Total : <span className="text-blue-400 mb-3">{sales.length}</span>
           </p>
         </div>
-        <div className="my-4 md:my-0 flex justify-center   border border-blue-400 p-2 rounded">
-      <span className="mx-2 text-red-500">from</span>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-      <span className="mx-2 text-red-500">to</span>
-      <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} />
-      </div>
+
 
         <DownloadTableExcel
           filename="sales-report table"

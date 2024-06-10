@@ -30,8 +30,8 @@ const SellerHomePage = () => {
                   <span>Revenue</span>
                 </div>
 
-                <div className="text-3xl">
-                  ${parseFloat(salesData.paidTotal).toFixed(3)}
+                <div className="text-2xl">
+                  ${parseFloat(salesData.paidTotal).toFixed(2)}
                 </div>
 
                 <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-green-600">
@@ -60,7 +60,7 @@ const SellerHomePage = () => {
                   <span>Pending</span>
                 </div>
 
-                <div className="text-3xl">{salesData?.pendingCount}</div>
+                <div className="text-2xl">{salesData?.pendingCount}</div>
 
                 <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-red-600">
                   <span>3% decrease</span>
@@ -88,7 +88,7 @@ const SellerHomePage = () => {
                   <span>Paid</span>
                 </div>
 
-                <div className="text-3xl">{salesData?.paidCount}</div>
+                <div className="text-2xl">{salesData?.paidCount}</div>
 
                 <div className="flex items-center space-x-1 rtl:space-x-reverse text-sm font-medium text-green-600">
                   <span>7% increase</span>

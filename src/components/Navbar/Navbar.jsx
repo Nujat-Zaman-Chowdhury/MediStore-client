@@ -108,7 +108,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-30 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link>Update Profile</Link>
+                <Link to="/profile">Update Profile</Link>
               </li>
               <li>
                 <Link to="/dashboard">Dashboard</Link>

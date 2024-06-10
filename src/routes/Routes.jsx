@@ -23,6 +23,7 @@ import CheckOut from "../pages/CheckOutPage/CheckOut";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import SellerRoute from "./SellerRoute";
+import ProfileUpdate from "../pages/ProfileUpdate/ProfileUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <PrivateRoute><CheckOut></CheckOut></PrivateRoute>,
+      },
+      {
+        path: "/profile",
+        element: <ProfileUpdate></ProfileUpdate>
       },
     ],
   },

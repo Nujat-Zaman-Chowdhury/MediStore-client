@@ -60,6 +60,7 @@ const Login = () => {
            
             console.log(err);
             toast.error(err.message)
+            setLoading(false)
         }
       }
   return (
@@ -120,7 +121,7 @@ const Login = () => {
 
           <div>
             <button
-            disabled={loading}
+            
               type="submit"
               className="bg-blue-400 w-full rounded-md py-3 text-white disabled:cursor-not-allowed"
             >

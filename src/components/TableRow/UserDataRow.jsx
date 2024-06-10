@@ -22,7 +22,7 @@ const UserDataRow = ({ user, index, refetch }) => {
       );
     },
     onSuccess: (data) => {
-      refetch();
+      // refetch();
       // console.log(data);
       toast.success("Role Updated Successfully");
       setIsOpen(false);
@@ -31,7 +31,7 @@ const UserDataRow = ({ user, index, refetch }) => {
   const handleRoleChange = async (selected) => {
     console.log(selected);
     //  Aadmin can't change their role
-    if (loggedInUser.email === user.email) {
+    if (loggedInUser.email === user?.email) {
       toast.error("Action not allowed");
       return setIsOpen(false);
     }
@@ -41,7 +41,7 @@ const UserDataRow = ({ user, index, refetch }) => {
     };
     try {
       const data = await mutateAsync(userRole);
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       console.log(err);
       toast.error(err.message);

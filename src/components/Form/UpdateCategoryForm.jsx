@@ -51,9 +51,10 @@ const UpdateCategoryForm = ({category,refetch,setIsEditModalOpen}) => {
       try{
           const {data} = await axiosSecure.put(`/category/update/${category?._id}`,updatedCategoryData)
           // console.log(data);
-          refetch()
+          
           setLoading(false)
           toast.success("Updated Successfully")
+          refetch()
       }
       catch(err){
           console.log(err);
@@ -113,6 +114,7 @@ console.log(categoryData);
                 <option value="Vitamins">Vitamins</option>
               </select>
             </div>
+
             <div className="flex flex-col w-1/2 mx-auto text-center py-4">
                   <label>
                     <input
