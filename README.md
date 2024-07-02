@@ -17,5 +17,8 @@
 - Admin has access to give any user seller or user role.
 - Efficient data fetching and caching with Tanstack Query operations
 
-
+### Run it
+- clone the project
+- go to terminal and write npm i
+- run the project using npm run dev command
 
