@@ -1,24 +1,43 @@
 # MediStore (Multi-Vendor Medicine Selling E-commerce Website)
 
 - [Live Site](https://medistore-91753.web.app)
- 
- # Admin
-- username:admin@gmail.com   password: 123456
 
+## Admin Credentials
+- **Username:** admin@gmail.com
+- **Password:** 123456
 
-### Features
-- Implemented secure user login with JWT based authentication.
-- Role based control for users,sellers and admins
-- Involved real time cart managements and payments system using stripe with secured system
-- User has access to download their invoice generation.
-- Users can search sort and filter their products listings
-- Category-wise product display with a modal for detailed view.
-- Comprehensive admin dashboard for managing users, categories, payments, and advertisements.
-- Admin has access to give any user seller or user role.
-- Efficient data fetching and caching with Tanstack Query operations
+## Project Overview
+- MediStore is an e-commerce platform designed to facilitate the sale of medicines from multiple vendors. It addresses the problem of accessing medicines easily and securely online.
 
-### Run it
-- clone the project
-- go to terminal and write npm i
-- run the project using npm run dev command
+## Features
+- **Secure Authentication:** Implements JWT-based secure user login.
+- **Role-Based Control:** Separate access levels for users, sellers, and admins.
+- **Real-Time Cart and Payment System:** Integrated with Stripe for secure payments and real-time cart management.
+- **Invoice Generation:** Users can download their purchase invoices.
+- **Product Search and Filter:** Users can search, sort, and filter products.
+- **Product Details:** Category-wise product display with detailed view modals.
+- **Admin Dashboard:** Comprehensive dashboard for managing users, categories, payments, and advertisements.
+- **User Role Management:** Admins can assign seller or user roles.
 
+## Technologies Used
+- React
+- Node.js
+- Express
+- MongoDB
+- JWT
+- Stripe
+- Tanstack Query
+
+## How to Run Locally
+1. **Clone the Project:** 
+    ```bash
+    git clone <repository_url>
+    ```
+2. **Install Dependencies:**
+    ```bash
+    npm install
+    ```
+3. **Run the Project:**
+    ```bash
+    npm run dev
+    ```
